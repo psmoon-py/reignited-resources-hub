@@ -1,8 +1,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import Card from "../ui/Card";
-import Button from "../ui/Button";
+import Card from "../ui/card";
+import Button from "../ui/button";
 import { Award, Briefcase, GraduationCap, Trophy } from "lucide-react";
 
 const opportunities = [

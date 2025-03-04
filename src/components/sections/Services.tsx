@@ -1,9 +1,8 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import Card from "../ui/Card";
+import Card from "../ui/card";
 import { BookOpen, File, GraduationCap, FileCheck } from "lucide-react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 
 const services = [
   {

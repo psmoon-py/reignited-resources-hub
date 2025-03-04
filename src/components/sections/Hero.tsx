@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from "react";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 import { ArrowRight, Sparkles, BookOpen, Award, Users } from "lucide-react";
 
 const Hero: React.FC = () => {

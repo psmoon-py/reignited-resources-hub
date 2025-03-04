@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { Menu, X, Lightbulb } from "lucide-react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import Button from "../ui/Button";
+import Button from "../ui/button";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

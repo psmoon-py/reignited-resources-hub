@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Card from "../ui/Card";
-import { BookOpen, Code, Flask, Calculator, BrainCircuit, Telescope } from "lucide-react";
+import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope } from "lucide-react";
 import Button from "../ui/Button";
 
 const resourceCategories = [
@@ -13,7 +13,7 @@ const resourceCategories = [
     delay: 0.1,
   },
   {
-    icon: <Flask className="h-10 w-10 text-brand-orange" />,
+    icon: <TestTube className="h-10 w-10 text-brand-orange" />,
     title: "Science",
     description: "Explore physics, chemistry, and biology resources with interactive experiments.",
     delay: 0.2,
