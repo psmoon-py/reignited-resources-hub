@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope } from "lucide-react";
+import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, Clock, Book, BookText, Presentation, GraduationCap, Lightbulb } from "lucide-react";
 
 // Define subject subcategories
 const programmingSubcategories = [
@@ -220,13 +220,14 @@ const generateResources = () => {
 
   // Generate resources for each category
   Object.entries(resourceTitles).forEach(([category, titles]) => {
-    const icon = 
-      category === "Programming" ? <Code className="h-8 w-8 text-brand-blue" /> :
-      category === "Science" ? <TestTube className="h-8 w-8 text-brand-orange" /> :
-      category === "Mathematics" ? <Calculator className="h-8 w-8 text-brand-blue" /> :
-      category === "AI & Machine Learning" ? <BrainCircuit className="h-8 w-8 text-brand-orange" /> :
-      category === "Astronomy" ? <Telescope className="h-8 w-8 text-brand-blue" /> :
-      <BookOpen className="h-8 w-8 text-brand-orange" />;
+    const getIconComponent = () => {
+      if (category === "Programming") return <Code className="h-8 w-8 text-brand-blue" />;
+      if (category === "Science") return <TestTube className="h-8 w-8 text-brand-orange" />;
+      if (category === "Mathematics") return <Calculator className="h-8 w-8 text-brand-blue" />;
+      if (category === "AI & Machine Learning") return <BrainCircuit className="h-8 w-8 text-brand-orange" />;
+      if (category === "Astronomy") return <Telescope className="h-8 w-8 text-brand-blue" />;
+      return <BookOpen className="h-8 w-8 text-brand-orange" />;
+    };
 
     // Create multiple variations of each title with different difficulty levels and types
     titles.forEach((title, titleIndex) => {
@@ -244,7 +245,7 @@ const generateResources = () => {
               description: descriptions[Math.floor(Math.random() * descriptions.length)],
               category,
               subcategory,
-              icon,
+              icon: getIconComponent(),
               level,
               type,
               views: Math.floor(Math.random() * 5000) + 100,
@@ -292,3 +293,37 @@ export const resourceTypes = ["All", "Tutorial", "Course", "Article", "Practice"
 
 // Get all difficulty levels
 export const difficultyLevels = ["All", "Beginner", "Intermediate", "Advanced"];
+
+// General guidance categories
+export const guidanceCategories = [
+  {
+    title: "Study Habits",
+    icon: React.createElement(Book, { className: "h-5 w-5 text-brand-blue" }),
+    description: "Develop effective study routines and habits for academic success"
+  },
+  {
+    title: "Time Management",
+    icon: React.createElement(Clock, { className: "h-5 w-5 text-brand-orange" }),
+    description: "Strategies for balancing school, activities, and personal time"
+  },
+  {
+    title: "Note-Taking",
+    icon: React.createElement(BookText, { className: "h-5 w-5 text-brand-blue" }),
+    description: "Methods for taking organized, effective notes that enhance learning"
+  },
+  {
+    title: "Test Preparation",
+    icon: React.createElement(Presentation, { className: "h-5 w-5 text-brand-orange" }),
+    description: "Techniques for effective exam preparation and reduced test anxiety"
+  },
+  {
+    title: "Career Planning",
+    icon: React.createElement(GraduationCap, { className: "h-5 w-5 text-brand-blue" }),
+    description: "Guidance for exploring STEM careers and planning your path"
+  },
+  {
+    title: "Learning Strategies",
+    icon: React.createElement(Lightbulb, { className: "h-5 w-5 text-brand-orange" }),
+    description: "Effective techniques to improve comprehension and retention"
+  }
+];
