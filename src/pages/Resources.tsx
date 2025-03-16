@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X } from "lucide-react";
@@ -427,99 +426,101 @@ const ResourcesPage: React.FC = () => {
                 <Button onClick={clearFilters}>Clear Filters</Button>
               </div>
             ) : (
-              <TabsContent value="grid" className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {currentItems.map((resource) => (
-                    <motion.div
-                      key={resource.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: (resource.id % 10) * 0.05 }}
-                    >
-                      <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
-                        <div className="flex justify-between items-start mb-4">
-                          <div className="p-3 rounded-full bg-muted/30">
-                            {resource.icon}
-                          </div>
-                          <div className="flex gap-2">
-                            <span className="px-2 py-1 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
-                              {resource.level}
-                            </span>
-                            <span className="px-2 py-1 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
-                              {resource.type}
-                            </span>
-                          </div>
-                        </div>
-                        
-                        <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
-                        
-                        <p className="text-foreground/70 mb-6 flex-grow">
-                          {resource.description}
-                        </p>
-                        
-                        <Button 
-                          variant="outline" 
-                          size="sm" 
-                          className="mt-auto w-full"
-                        >
-                          Access Resource
-                        </Button>
-                      </Card>
-                    </motion.div>
-                  ))}
-                </div>
-              </TabsContent>
-              
-              <TabsContent value="list" className="mt-0">
-                <ScrollArea className="h-[70vh] rounded-md border">
-                  <div className="w-full">
+              <>
+                <TabsContent value="grid" className="mt-0">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {currentItems.map((resource) => (
                       <motion.div
                         key={resource.id}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="border-b p-4 hover:bg-muted/10"
+                        transition={{ delay: (resource.id % 10) * 0.05 }}
                       >
-                        <div className="flex items-start gap-4">
-                          <div className="p-2 rounded-full bg-muted/30 shrink-0">
-                            {resource.icon}
+                        <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
+                          <div className="flex justify-between items-start mb-4">
+                            <div className="p-3 rounded-full bg-muted/30">
+                              {resource.icon}
+                            </div>
+                            <div className="flex gap-2">
+                              <span className="px-2 py-1 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
+                                {resource.level}
+                              </span>
+                              <span className="px-2 py-1 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
+                                {resource.type}
+                              </span>
+                            </div>
                           </div>
                           
-                          <div className="flex-grow">
-                            <div className="flex justify-between items-start">
-                              <h3 className="text-lg font-semibold">{resource.title}</h3>
-                              <div className="flex gap-2">
-                                <span className="px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
-                                  {resource.level}
-                                </span>
-                                <span className="px-2 py-0.5 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
-                                  {resource.type}
-                                </span>
-                              </div>
-                            </div>
-                            
-                            <p className="text-sm text-foreground/70 my-2">
-                              {resource.description}
-                            </p>
-                            
-                            <div className="flex justify-between items-center">
-                              <span className="text-xs text-foreground/50">{resource.category}</span>
-                              <Button 
-                                variant="outline" 
-                                size="sm"
-                              >
-                                Access Resource
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
+                          <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
+                          
+                          <p className="text-foreground/70 mb-6 flex-grow">
+                            {resource.description}
+                          </p>
+                          
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="mt-auto w-full"
+                          >
+                            Access Resource
+                          </Button>
+                        </Card>
                       </motion.div>
                     ))}
                   </div>
-                </ScrollArea>
-              </TabsContent>
+                </TabsContent>
+                
+                <TabsContent value="list" className="mt-0">
+                  <ScrollArea className="h-[70vh] rounded-md border">
+                    <div className="w-full">
+                      {currentItems.map((resource) => (
+                        <motion.div
+                          key={resource.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          className="border-b p-4 hover:bg-muted/10"
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="p-2 rounded-full bg-muted/30 shrink-0">
+                              {resource.icon}
+                            </div>
+                            
+                            <div className="flex-grow">
+                              <div className="flex justify-between items-start">
+                                <h3 className="text-lg font-semibold">{resource.title}</h3>
+                                <div className="flex gap-2">
+                                  <span className="px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
+                                    {resource.level}
+                                  </span>
+                                  <span className="px-2 py-0.5 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
+                                    {resource.type}
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <p className="text-sm text-foreground/70 my-2">
+                                {resource.description}
+                              </p>
+                              
+                              <div className="flex justify-between items-center">
+                                <span className="text-xs text-foreground/50">{resource.category}</span>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                >
+                                  Access Resource
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </TabsContent>
+              </>
             )}
             
             {filteredResources.length > 0 && (
@@ -549,3 +550,4 @@ const ResourcesPage: React.FC = () => {
 };
 
 export default ResourcesPage;
+
