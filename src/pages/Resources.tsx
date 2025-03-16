@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X } from "lucide-react";
+import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X, ArrowUpAZ, ArrowDownAZ, ArrowUp, RotateCcw, List, Grid2X2 } from "lucide-react";
 import Button from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import Navbar from "@/components/layout/Navbar";
@@ -9,11 +10,21 @@ import ContactForm from "@/components/sections/ContactForm";
 import Pagination from "@/components/ui/pagination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 // Categories and other filter options
 const categories = ["All", "Programming", "Science", "Mathematics", "AI & Machine Learning", "Astronomy", "Study Materials"];
 const levels = ["All", "Beginner", "Intermediate", "Advanced"];
 const types = ["All", "Tutorial", "Course", "Article", "Practice", "Study Guide", "Experiment", "Guide"];
+
+// Sort options
+const sortOptions = [
+  { value: "az", label: "A-Z", icon: <ArrowUpAZ className="h-4 w-4 mr-2" /> },
+  { value: "za", label: "Z-A", icon: <ArrowDownAZ className="h-4 w-4 mr-2" /> },
+  { value: "newest", label: "Newest", icon: <ArrowUp className="h-4 w-4 mr-2" /> },
+  { value: "oldest", label: "Oldest", icon: <RotateCcw className="h-4 w-4 mr-2" /> },
+];
 
 // Generate 1000+ resources
 const generateResources = () => {
@@ -217,10 +228,12 @@ const ResourcesPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const [activeTab, setActiveTab] = useState("grid");
+  const [sortOption, setSortOption] = useState("az");
 
+  // Filter resources based on search term and selected filters
   const filteredResources = resourcesData.filter((resource) => {
     const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         resource.description.toLowerCase().includes(searchTerm.toLowerCase());
+                          resource.description.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesCategory = selectedCategory === "All" || resource.category === selectedCategory;
     const matchesLevel = selectedLevel === "All" || resource.level === selectedLevel;
@@ -229,11 +242,27 @@ const ResourcesPage: React.FC = () => {
     return matchesSearch && matchesCategory && matchesLevel && matchesType;
   });
 
+  // Sort resources based on selected sort option
+  const sortedResources = [...filteredResources].sort((a, b) => {
+    switch (sortOption) {
+      case "az":
+        return a.title.localeCompare(b.title);
+      case "za":
+        return b.title.localeCompare(a.title);
+      case "newest":
+        return b.id - a.id;
+      case "oldest":
+        return a.id - b.id;
+      default:
+        return 0;
+    }
+  });
+
   // Calculate pagination
-  const totalFilteredItems = filteredResources.length;
+  const totalFilteredItems = sortedResources.length;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredResources.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = sortedResources.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -246,12 +275,13 @@ const ResourcesPage: React.FC = () => {
     setSelectedLevel("All");
     setSelectedType("All");
     setSearchTerm("");
+    setSortOption("az");
   };
 
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategory, selectedLevel, selectedType]);
+  }, [searchTerm, selectedCategory, selectedLevel, selectedType, sortOption]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -390,33 +420,58 @@ const ResourcesPage: React.FC = () => {
           <div className="container mx-auto px-6">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-semibold">
-                {filteredResources.length} Resources Found
+                {sortedResources.length} Resources Found
               </h2>
               
               <div className="flex items-center gap-4">
+                {/* Sort Dropdown */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="sm" className="flex items-center gap-1">
+                      <Filter className="h-4 w-4 mr-1" /> 
+                      Sort
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    {sortOptions.map((option) => (
+                      <DropdownMenuItem 
+                        key={option.value}
+                        onClick={() => setSortOption(option.value)}
+                        className="flex items-center cursor-pointer"
+                      >
+                        {option.icon}
+                        {option.label}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                
+                {/* View Tabs */}
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
                   <TabsList className="grid w-24 grid-cols-2">
-                    <TabsTrigger value="grid">Grid</TabsTrigger>
-                    <TabsTrigger value="list">List</TabsTrigger>
+                    <TabsTrigger value="grid"><Grid2X2 className="h-4 w-4" /></TabsTrigger>
+                    <TabsTrigger value="list"><List className="h-4 w-4" /></TabsTrigger>
                   </TabsList>
                 </Tabs>
                 
+                {/* Items per page selector */}
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-foreground/70 hidden md:inline">Items per page:</span>
-                  <select 
-                    className="bg-muted/10 border border-muted rounded-md px-2 py-1"
-                    value={itemsPerPage}
-                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                  >
-                    <option value="12">12</option>
-                    <option value="24">24</option>
-                    <option value="48">48</option>
-                  </select>
+                  <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(Number(value))}>
+                    <SelectTrigger className="w-16">
+                      <SelectValue placeholder="12" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="12">12</SelectItem>
+                      <SelectItem value="24">24</SelectItem>
+                      <SelectItem value="48">48</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
             
-            {filteredResources.length === 0 ? (
+            {sortedResources.length === 0 ? (
               <div className="text-center py-16">
                 <BookOpen className="h-16 w-16 mx-auto text-foreground/30 mb-4" />
                 <h3 className="text-xl font-semibold mb-2">No resources found</h3>
@@ -426,7 +481,7 @@ const ResourcesPage: React.FC = () => {
                 <Button onClick={clearFilters}>Clear Filters</Button>
               </div>
             ) : (
-              <>
+              <Tabs value={activeTab} defaultValue="grid">
                 <TabsContent value="grid" className="mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {currentItems.map((resource) => (
@@ -520,13 +575,13 @@ const ResourcesPage: React.FC = () => {
                     </div>
                   </ScrollArea>
                 </TabsContent>
-              </>
+              </Tabs>
             )}
             
-            {filteredResources.length > 0 && (
+            {sortedResources.length > 0 && (
               <div className="mt-12">
                 <Pagination
-                  totalItems={filteredResources.length}
+                  totalItems={sortedResources.length}
                   itemsPerPage={itemsPerPage}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}
@@ -534,7 +589,7 @@ const ResourcesPage: React.FC = () => {
                 />
                 
                 <div className="text-center text-sm text-foreground/70">
-                  Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, filteredResources.length)} of {filteredResources.length} resources
+                  Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, sortedResources.length)} of {sortedResources.length} resources
                 </div>
               </div>
             )}
@@ -550,4 +605,3 @@ const ResourcesPage: React.FC = () => {
 };
 
 export default ResourcesPage;
-
