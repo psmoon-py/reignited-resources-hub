@@ -72,7 +72,7 @@ const Resources: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Access a comprehensive library of high-quality resources designed to help you excel in your STEM journey. All completely free.
+            Access a comprehensive library of 1000+ high-quality resources designed to help you excel in your STEM journey. All completely free.
           </motion.p>
         </div>
 
