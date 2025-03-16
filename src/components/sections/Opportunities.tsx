@@ -1,6 +1,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import Card from "../ui/card";
 import Button from "../ui/button";
 import { Award, Briefcase, GraduationCap, Trophy } from "lucide-react";
@@ -41,6 +42,8 @@ const opportunities = [
 ];
 
 const Opportunities: React.FC = () => {
+  const navigate = useNavigate();
+  
   return (
     <section id="opportunities" className="py-24 gradient-bg">
       <div className="container mx-auto px-6">
@@ -97,7 +100,11 @@ const Opportunities: React.FC = () => {
         </div>
         
         <div className="mt-16 text-center">
-          <Button size="lg" variant="outline">
+          <Button 
+            size="lg" 
+            variant="outline"
+            onClick={() => navigate("/opportunities")}
+          >
             View All Opportunities
           </Button>
         </div>

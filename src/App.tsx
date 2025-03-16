@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import ResourcesPage from "./pages/Resources";
 import Auth from "./pages/Auth";
 import { AuthProvider } from "./contexts/AuthContext";
+import Opportunities from "./pages/Opportunities";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/opportunities" element={<Opportunities />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
