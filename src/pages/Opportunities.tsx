@@ -44,25 +44,20 @@ const Opportunities: React.FC = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const itemsPerPage = 9;
 
-  // Filter opportunities
   const filteredOpportunities = mockOpportunities.filter((opportunity) => {
-    // Search term filter
     const matchesSearchTerm = 
       searchTerm === "" || 
       opportunity.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
       opportunity.organization.toLowerCase().includes(searchTerm.toLowerCase());
     
-    // Type filter
     const matchesType = 
       selectedTypes.length === 0 || 
       selectedTypes.includes(opportunity.type);
     
-    // Status filter
     const matchesStatus = 
       selectedStatus === "all" || 
       opportunity.status === selectedStatus;
     
-    // Education level filter
     const matchesEducation = 
       selectedEducation === "all" || 
       opportunity.eligibleEducationLevels.includes(selectedEducation as EducationLevel);
@@ -70,7 +65,6 @@ const Opportunities: React.FC = () => {
     return matchesSearchTerm && matchesType && matchesStatus && matchesEducation;
   });
 
-  // Sort opportunities
   const sortedOpportunities = [...filteredOpportunities].sort((a, b) => {
     let comparison = 0;
     
@@ -91,14 +85,12 @@ const Opportunities: React.FC = () => {
     return sortDirection === "asc" ? comparison : -comparison;
   });
 
-  // Pagination
   const totalPages = Math.ceil(sortedOpportunities.length / itemsPerPage);
   const currentOpportunities = sortedOpportunities.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  // Reset page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, selectedTypes, selectedStatus, selectedEducation, sortOption, sortDirection]);
@@ -134,7 +126,6 @@ const Opportunities: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section */}
         <section className="bg-gradient-to-b from-brand-blue/10 to-transparent pt-32 pb-16">
           <div className="container mx-auto px-6">
             <motion.h1 
@@ -206,17 +197,14 @@ const Opportunities: React.FC = () => {
           </div>
         </section>
 
-        {/* Main Content */}
         <section className="py-12">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              {/* Filters - Desktop */}
               <div className="hidden lg:block">
                 <Card className="p-6 sticky top-24">
                   <h3 className="text-lg font-semibold mb-4">Filters</h3>
                   
                   <div className="space-y-6">
-                    {/* Opportunity Type */}
                     <div>
                       <h4 className="font-medium mb-2">Opportunity Type</h4>
                       <div className="space-y-2">
@@ -235,7 +223,6 @@ const Opportunities: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Status */}
                     <div>
                       <h4 className="font-medium mb-2">Status</h4>
                       <Select 
@@ -254,7 +241,6 @@ const Opportunities: React.FC = () => {
                       </Select>
                     </div>
 
-                    {/* Education Level */}
                     <div>
                       <h4 className="font-medium mb-2">Education Level</h4>
                       <Select 
@@ -273,7 +259,6 @@ const Opportunities: React.FC = () => {
                       </Select>
                     </div>
 
-                    {/* Sort */}
                     <div>
                       <h4 className="font-medium mb-2">Sort By</h4>
                       <div className="grid grid-cols-2 gap-2">
@@ -315,7 +300,6 @@ const Opportunities: React.FC = () => {
                 </Card>
               </div>
 
-              {/* Mobile Filters */}
               <div className="lg:hidden mb-6">
                 <div className="flex justify-between items-center mb-4">
                   <Button 
@@ -425,9 +409,7 @@ const Opportunities: React.FC = () => {
                 )}
               </div>
 
-              {/* Results */}
               <div className="lg:col-span-3">
-                {/* Results Count */}
                 <div className="mb-6">
                   <p className="text-foreground/70">
                     Showing {currentOpportunities.length} of {filteredOpportunities.length} opportunities
@@ -485,7 +467,12 @@ const Opportunities: React.FC = () => {
                             ))}
                           </div>
                           
-                          <Button className="w-full">Apply Now</Button>
+                          <Button 
+                            className="w-full"
+                            onClick={() => window.open(opportunity.link, "_blank", "noopener,noreferrer")}
+                          >
+                            Apply Now
+                          </Button>
                         </div>
                       </Card>
                     ))}
@@ -508,7 +495,6 @@ const Opportunities: React.FC = () => {
                   </div>
                 )}
 
-                {/* Pagination */}
                 {totalPages > 1 && (
                   <div className="mt-10">
                     <Pagination

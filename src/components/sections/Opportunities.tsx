@@ -89,7 +89,11 @@ const Opportunities: React.FC = () => {
                     <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                     <p className="text-sm text-brand-blue mb-4">{item.date}</p>
                     <p className="text-foreground/70 mb-6">{item.description}</p>
-                    <Button variant={index % 2 === 0 ? "primary" : "secondary"} className="w-full">
+                    <Button 
+                      variant={index % 2 === 0 ? "primary" : "secondary"} 
+                      className="w-full"
+                      onClick={() => window.open("https://example.com/apply", "_blank", "noopener,noreferrer")}
+                    >
                       Apply Now
                     </Button>
                   </div>
