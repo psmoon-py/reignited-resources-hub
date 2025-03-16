@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { AnimatePresence } from "framer-motion";
 import ResourcesPage from "./pages/Resources";
+import ResourceDetail from "./pages/ResourceDetail";
 import Auth from "./pages/Auth";
 import { AuthProvider } from "./contexts/AuthContext";
 import Opportunities from "./pages/Opportunities";
@@ -25,6 +26,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/resource/:id" element={<ResourceDetail />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/opportunities" element={<Opportunities />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

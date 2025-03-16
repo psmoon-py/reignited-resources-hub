@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X, ArrowUpAZ, ArrowDownAZ, ArrowUp, RotateCcw, List, Grid2X2 } from "lucide-react";
+import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X, ArrowUpAZ, ArrowDownAZ, ArrowUp, RotateCcw, List, Grid2X2, Lightbulb, Book, Presentation, BookText, GraduationCap } from "lucide-react";
 import Button from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import Navbar from "@/components/layout/Navbar";
@@ -12,11 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-
-// Categories and other filter options
-const categories = ["All", "Programming", "Science", "Mathematics", "AI & Machine Learning", "Astronomy", "Study Materials"];
-const levels = ["All", "Beginner", "Intermediate", "Advanced"];
-const types = ["All", "Tutorial", "Course", "Article", "Practice", "Study Guide", "Experiment", "Guide"];
+import { resourcesData, subjectCategories, resourceTypes, difficultyLevels } from "@/data/resources";
 
 // Sort options
 const sortOptions = [
@@ -26,202 +23,45 @@ const sortOptions = [
   { value: "oldest", label: "Oldest", icon: <RotateCcw className="h-4 w-4 mr-2" /> },
 ];
 
-// Generate 1000+ resources
-const generateResources = () => {
-  const resourceTitles = {
-    Programming: [
-      "Introduction to Python Programming",
-      "Advanced Java Techniques",
-      "C++ Data Structures",
-      "Web Development with React",
-      "Mobile App Development with Flutter",
-      "Rust Programming Language",
-      "Go Programming Tutorial",
-      "JavaScript Fundamentals",
-      "HTML and CSS Basics",
-      "RESTful API Design",
-      "Backend Development with Node.js",
-      "Introduction to TypeScript",
-      "Ruby on Rails Development",
-      "SQL Database Design",
-      "MongoDB for Beginners",
-      "Git and GitHub Version Control",
-      "Functional Programming in JavaScript",
-      "Object-Oriented Programming Principles",
-      "Algorithms and Problem Solving",
-      "Secure Coding Practices",
-    ],
-    Science: [
-      "Chemistry Lab Experiments",
-      "Physics: Mechanics and Motion",
-      "Biology: Cell Structure and Function",
-      "Environmental Science Projects",
-      "Chemistry: Periodic Table Explained",
-      "Physics: Electricity and Magnetism",
-      "Biology: Genetics and Heredity",
-      "Earth Science: Geology Basics",
-      "Chemistry: Organic Compounds",
-      "Physics: Thermodynamics",
-      "Biology: Ecology and Ecosystems",
-      "Astronomy: The Solar System",
-      "Chemistry: Chemical Reactions",
-      "Physics: Waves and Optics",
-      "Biology: Human Anatomy",
-      "Environmental Science: Climate Change",
-      "Chemistry: Solutions and Mixtures",
-      "Physics: Quantum Mechanics",
-      "Biology: Evolution and Natural Selection",
-      "Forensic Science Techniques",
-    ],
-    Mathematics: [
-      "Advanced Calculus Practice Problems",
-      "Linear Algebra Essentials",
-      "Statistics and Probability",
-      "Geometry Problem Solving",
-      "Algebra I Fundamentals",
-      "Algebra II and Functions",
-      "Trigonometry Basics",
-      "Pre-Calculus Concepts",
-      "Differential Equations",
-      "Discrete Mathematics",
-      "Number Theory Introduction",
-      "Mathematical Proofs",
-      "Vector Calculus",
-      "Complex Analysis",
-      "Applied Mathematics",
-      "Mathematical Modeling",
-      "Numerical Methods",
-      "Graph Theory",
-      "Optimization Techniques",
-      "Mathematical Logic",
-    ],
-    "AI & Machine Learning": [
-      "Neural Networks Demystified",
-      "Deep Learning Applications",
-      "Introduction to Machine Learning",
-      "Natural Language Processing",
-      "Computer Vision Fundamentals",
-      "Reinforcement Learning",
-      "AI Ethics and Governance",
-      "Data Science with Python",
-      "TensorFlow and Keras",
-      "PyTorch for Deep Learning",
-      "Big Data Analytics",
-      "AI for Robotics",
-      "Generative AI Models",
-      "Recommender Systems",
-      "Time Series Forecasting",
-      "Clustering Algorithms",
-      "Decision Trees and Random Forests",
-      "Support Vector Machines",
-      "AI in Healthcare",
-      "AI for Climate Science",
-    ],
-    Astronomy: [
-      "Astronomy: Exploring Our Solar System",
-      "Stellar Evolution and Black Holes",
-      "Galaxies and the Universe",
-      "Celestial Navigation",
-      "Telescopes and Astronomical Instruments",
-      "Planetary Science",
-      "The Life Cycle of Stars",
-      "Cosmic Microwave Background",
-      "Dark Matter and Dark Energy",
-      "Space Exploration History",
-      "Astronomical Phenomena",
-      "Exoplanets and Habitable Worlds",
-      "Cosmology: The Big Bang Theory",
-      "Radio Astronomy",
-      "Astrophotography for Beginners",
-      "Astrobiology: Life in the Universe",
-      "Gravitational Waves",
-      "Comets, Asteroids, and Meteors",
-      "The Milky Way Galaxy",
-      "Stargazing for Beginners",
-    ],
-    "Study Materials": [
-      "Organic Chemistry Study Guide",
-      "Study Skills for STEM Students",
-      "Exam Preparation Techniques",
-      "Note-Taking Strategies",
-      "Time Management for Students",
-      "Memory Improvement Techniques",
-      "Critical Thinking Skills",
-      "Research Paper Writing Guide",
-      "Scientific Method Explained",
-      "Laboratory Safety Guidelines",
-      "STEM Career Planning",
-      "Scholarship Application Guide",
-      "College Application Essays",
-      "Scientific Literature Review",
-      "Technical Writing Guidelines",
-      "Presentation Skills for STEM",
-      "Collaboration in STEM Projects",
-      "Math Problem-Solving Strategies",
-      "Science Fair Project Ideas",
-      "STEM Internship Preparation",
-    ],
-  };
-
-  const descriptions = [
-    "A comprehensive guide covering fundamental concepts with practical examples and exercises.",
-    "In-depth exploration of advanced topics with step-by-step explanations and interactive demonstrations.",
-    "Hands-on learning resource with projects and challenges to reinforce understanding and build skills.",
-    "Detailed tutorial with visual aids and real-world applications to enhance learning experience.",
-    "Concise reference material with key formulas, definitions, and examples for quick review and study.",
-    "Problem-solving focused resource with practice exercises and worked solutions to develop critical thinking.",
-    "Interactive learning module with simulations and experiments to promote active engagement.",
-    "Self-paced course with quizzes and assessments to track progress and mastery of concepts.",
-    "Research-based content with the latest developments and discoveries in the field.",
-    "Beginner-friendly introduction with clear explanations and no prior knowledge required.",
-  ];
-
-  let resources = [];
-  let id = 1;
-
-  // Generate resources for each category
-  Object.entries(resourceTitles).forEach(([category, titles]) => {
-    const icon = 
-      category === "Programming" ? <Code className="h-8 w-8 text-brand-blue" /> :
-      category === "Science" ? <TestTube className="h-8 w-8 text-brand-orange" /> :
-      category === "Mathematics" ? <Calculator className="h-8 w-8 text-brand-blue" /> :
-      category === "AI & Machine Learning" ? <BrainCircuit className="h-8 w-8 text-brand-orange" /> :
-      category === "Astronomy" ? <Telescope className="h-8 w-8 text-brand-blue" /> :
-      <BookOpen className="h-8 w-8 text-brand-orange" />;
-
-    // Create multiple variations of each title with different difficulty levels and types
-    titles.forEach(title => {
-      levels.slice(1).forEach(level => {
-        types.slice(1).forEach(type => {
-          // Create variations of the title
-          const variation = `${title} - ${type}`;
-          
-          // Add multiple resources for each combination
-          for (let i = 0; i < 3; i++) {
-            resources.push({
-              id: id++,
-              title: i === 0 ? title : `${title} (${i})`,
-              description: descriptions[Math.floor(Math.random() * descriptions.length)],
-              category,
-              icon,
-              level,
-              type,
-            });
-          }
-        });
-      });
-    });
-  });
-
-  return resources;
-};
-
-// Create resource data (1000+ items)
-const resourcesData = generateResources();
+// General guidance categories
+const guidanceCategories = [
+  {
+    title: "Study Habits",
+    icon: <Book className="h-5 w-5 text-brand-blue" />,
+    description: "Develop effective study routines and habits for academic success"
+  },
+  {
+    title: "Time Management",
+    icon: <Clock className="h-5 w-5 text-brand-orange" />,
+    description: "Strategies for balancing school, activities, and personal time"
+  },
+  {
+    title: "Note-Taking",
+    icon: <BookText className="h-5 w-5 text-brand-blue" />,
+    description: "Methods for taking organized, effective notes that enhance learning"
+  },
+  {
+    title: "Test Preparation",
+    icon: <Presentation className="h-5 w-5 text-brand-orange" />,
+    description: "Techniques for effective exam preparation and reduced test anxiety"
+  },
+  {
+    title: "Career Planning",
+    icon: <GraduationCap className="h-5 w-5 text-brand-blue" />,
+    description: "Guidance for exploring STEM careers and planning your path"
+  },
+  {
+    title: "Learning Strategies",
+    icon: <Lightbulb className="h-5 w-5 text-brand-orange" />,
+    description: "Effective techniques to improve comprehension and retention"
+  }
+];
 
 const ResourcesPage: React.FC = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedSubcategory, setSelectedSubcategory] = useState("All");
   const [selectedLevel, setSelectedLevel] = useState("All");
   const [selectedType, setSelectedType] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
@@ -229,6 +69,17 @@ const ResourcesPage: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const [activeTab, setActiveTab] = useState("grid");
   const [sortOption, setSortOption] = useState("az");
+  const [mainView, setMainView] = useState("resources"); // "resources" or "guidance"
+  
+  // Get available subcategories based on selected category
+  const availableSubcategories = selectedCategory !== "All" 
+    ? ["All", ...subjectCategories[selectedCategory as keyof typeof subjectCategories]] 
+    : ["All"];
+
+  // Reset subcategory when category changes
+  useEffect(() => {
+    setSelectedSubcategory("All");
+  }, [selectedCategory]);
 
   // Filter resources based on search term and selected filters
   const filteredResources = resourcesData.filter((resource) => {
@@ -236,10 +87,11 @@ const ResourcesPage: React.FC = () => {
                           resource.description.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesCategory = selectedCategory === "All" || resource.category === selectedCategory;
+    const matchesSubcategory = selectedSubcategory === "All" || resource.subcategory === selectedSubcategory;
     const matchesLevel = selectedLevel === "All" || resource.level === selectedLevel;
     const matchesType = selectedType === "All" || resource.type === selectedType;
     
-    return matchesSearch && matchesCategory && matchesLevel && matchesType;
+    return matchesSearch && matchesCategory && matchesSubcategory && matchesLevel && matchesType;
   });
 
   // Sort resources based on selected sort option
@@ -272,16 +124,21 @@ const ResourcesPage: React.FC = () => {
 
   const clearFilters = () => {
     setSelectedCategory("All");
+    setSelectedSubcategory("All");
     setSelectedLevel("All");
     setSelectedType("All");
     setSearchTerm("");
     setSortOption("az");
   };
 
+  const handleResourceClick = (resourceId: number) => {
+    navigate(`/resource/${resourceId}`);
+  };
+
   // Reset to page 1 when filters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategory, selectedLevel, selectedType, sortOption]);
+  }, [searchTerm, selectedCategory, selectedSubcategory, selectedLevel, selectedType, sortOption, mainView]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -334,6 +191,34 @@ const ResourcesPage: React.FC = () => {
           </div>
         </section>
         
+        {/* Toggle between Resources and Guidance */}
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-center mb-4">
+            <div className="inline-flex rounded-md shadow-sm">
+              <button
+                onClick={() => setMainView("resources")}
+                className={`px-4 py-2 text-sm font-medium rounded-l-lg border ${
+                  mainView === "resources" 
+                  ? "bg-brand-blue text-white border-brand-blue" 
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                Resources
+              </button>
+              <button
+                onClick={() => setMainView("guidance")}
+                className={`px-4 py-2 text-sm font-medium rounded-r-lg border ${
+                  mainView === "guidance" 
+                  ? "bg-brand-blue text-white border-brand-blue" 
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                }`}
+              >
+                General Guidance
+              </button>
+            </div>
+          </div>
+        </div>
+        
         {/* Filters */}
         <motion.section 
           initial={{ height: 0, opacity: 0 }}
@@ -354,247 +239,334 @@ const ResourcesPage: React.FC = () => {
               </button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <label className="block text-sm font-medium mb-2">Category</label>
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-3 py-1 rounded-full text-sm ${
-                        selectedCategory === category
-                          ? "bg-brand-blue text-white"
-                          : "bg-muted/50 hover:bg-muted"
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium mb-2">Level</label>
-                <div className="flex flex-wrap gap-2">
-                  {levels.map((level) => (
-                    <button
-                      key={level}
-                      onClick={() => setSelectedLevel(level)}
-                      className={`px-3 py-1 rounded-full text-sm ${
-                        selectedLevel === level
-                          ? "bg-brand-blue text-white"
-                          : "bg-muted/50 hover:bg-muted"
-                      }`}
-                    >
-                      {level}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium mb-2">Type</label>
-                <div className="flex flex-wrap gap-2">
-                  {types.map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => setSelectedType(type)}
-                      className={`px-3 py-1 rounded-full text-sm ${
-                        selectedType === type
-                          ? "bg-brand-blue text-white"
-                          : "bg-muted/50 hover:bg-muted"
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.section>
-        
-        {/* Resources Display */}
-        <section className="py-12">
-          <div className="container mx-auto px-6">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-2xl font-semibold">
-                {sortedResources.length} Resources Found
-              </h2>
-              
-              <div className="flex items-center gap-4">
-                {/* Sort Dropdown */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="flex items-center gap-1">
-                      <Filter className="h-4 w-4 mr-1" /> 
-                      Sort
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    {sortOptions.map((option) => (
-                      <DropdownMenuItem 
-                        key={option.value}
-                        onClick={() => setSortOption(option.value)}
-                        className="flex items-center cursor-pointer"
-                      >
-                        {option.icon}
-                        {option.label}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                
-                {/* View Tabs */}
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
-                  <TabsList className="grid w-24 grid-cols-2">
-                    <TabsTrigger value="grid"><Grid2X2 className="h-4 w-4" /></TabsTrigger>
-                    <TabsTrigger value="list"><List className="h-4 w-4" /></TabsTrigger>
-                  </TabsList>
-                </Tabs>
-                
-                {/* Items per page selector */}
-                <div className="flex items-center gap-2">
-                  <span className="text-sm text-foreground/70 hidden md:inline">Items per page:</span>
-                  <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(Number(value))}>
-                    <SelectTrigger className="w-16">
-                      <SelectValue placeholder="12" />
+            {mainView === "resources" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {/* Subject Category */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">Subject</label>
+                  <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a subject" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="12">12</SelectItem>
-                      <SelectItem value="24">24</SelectItem>
-                      <SelectItem value="48">48</SelectItem>
+                      {Object.keys(subjectCategories).map((category) => (
+                        <SelectItem key={category} value={category}>
+                          {category}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Subcategory - only show if a category is selected */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">Topic</label>
+                  <Select 
+                    value={selectedSubcategory} 
+                    onValueChange={setSelectedSubcategory}
+                    disabled={selectedCategory === "All"}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a topic" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {availableSubcategories.map((subcategory) => (
+                        <SelectItem key={subcategory} value={subcategory}>
+                          {subcategory}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Level */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">Level</label>
+                  <Select value={selectedLevel} onValueChange={setSelectedLevel}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select difficulty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {difficultyLevels.map((level) => (
+                        <SelectItem key={level} value={level}>
+                          {level}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                {/* Type */}
+                <div>
+                  <label className="block text-sm font-medium mb-2">Type</label>
+                  <Select value={selectedType} onValueChange={setSelectedType}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select resource type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {resourceTypes.map((type) => (
+                        <SelectItem key={type} value={type}>
+                          {type}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </div>
               </div>
-            </div>
-            
-            {sortedResources.length === 0 ? (
-              <div className="text-center py-16">
-                <BookOpen className="h-16 w-16 mx-auto text-foreground/30 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">No resources found</h3>
-                <p className="text-foreground/70 mb-6">
-                  Try adjusting your search or filters to find what you're looking for.
-                </p>
-                <Button onClick={clearFilters}>Clear Filters</Button>
-              </div>
-            ) : (
-              <Tabs value={activeTab} defaultValue="grid">
-                <TabsContent value="grid" className="mt-0">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {currentItems.map((resource) => (
-                      <motion.div
-                        key={resource.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: (resource.id % 10) * 0.05 }}
-                      >
-                        <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
-                          <div className="flex justify-between items-start mb-4">
-                            <div className="p-3 rounded-full bg-muted/30">
-                              {resource.icon}
-                            </div>
-                            <div className="flex gap-2">
-                              <span className="px-2 py-1 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
-                                {resource.level}
-                              </span>
-                              <span className="px-2 py-1 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
-                                {resource.type}
-                              </span>
-                            </div>
-                          </div>
-                          
-                          <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
-                          
-                          <p className="text-foreground/70 mb-6 flex-grow">
-                            {resource.description}
-                          </p>
-                          
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="mt-auto w-full"
-                          >
-                            Access Resource
-                          </Button>
-                        </Card>
-                      </motion.div>
-                    ))}
-                  </div>
-                </TabsContent>
+            )}
+          </div>
+        </motion.section>
+        
+        {/* Main Content - Resources or Guidance */}
+        {mainView === "resources" ? (
+          <section className="py-12">
+            <div className="container mx-auto px-6">
+              <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl font-semibold">
+                  {sortedResources.length} Resources Found
+                </h2>
                 
-                <TabsContent value="list" className="mt-0">
-                  <ScrollArea className="h-[70vh] rounded-md border">
-                    <div className="w-full">
+                <div className="flex items-center gap-4">
+                  {/* Sort Dropdown */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="flex items-center gap-1">
+                        <Filter className="h-4 w-4 mr-1" /> 
+                        Sort
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      {sortOptions.map((option) => (
+                        <DropdownMenuItem 
+                          key={option.value}
+                          onClick={() => setSortOption(option.value)}
+                          className="flex items-center cursor-pointer"
+                        >
+                          {option.icon}
+                          {option.label}
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  
+                  {/* View Tabs */}
+                  <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
+                    <TabsList className="grid w-24 grid-cols-2">
+                      <TabsTrigger value="grid"><Grid2X2 className="h-4 w-4" /></TabsTrigger>
+                      <TabsTrigger value="list"><List className="h-4 w-4" /></TabsTrigger>
+                    </TabsList>
+                  </Tabs>
+                  
+                  {/* Items per page selector */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-foreground/70 hidden md:inline">Items per page:</span>
+                    <Select value={itemsPerPage.toString()} onValueChange={(value) => setItemsPerPage(Number(value))}>
+                      <SelectTrigger className="w-16">
+                        <SelectValue placeholder="12" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="12">12</SelectItem>
+                        <SelectItem value="24">24</SelectItem>
+                        <SelectItem value="48">48</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+              
+              {sortedResources.length === 0 ? (
+                <div className="text-center py-16">
+                  <BookOpen className="h-16 w-16 mx-auto text-foreground/30 mb-4" />
+                  <h3 className="text-xl font-semibold mb-2">No resources found</h3>
+                  <p className="text-foreground/70 mb-6">
+                    Try adjusting your search or filters to find what you're looking for.
+                  </p>
+                  <Button onClick={clearFilters}>Clear Filters</Button>
+                </div>
+              ) : (
+                <Tabs value={activeTab} defaultValue="grid">
+                  <TabsContent value="grid" className="mt-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                       {currentItems.map((resource) => (
                         <motion.div
                           key={resource.id}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
-                          className="border-b p-4 hover:bg-muted/10"
+                          transition={{ delay: (resource.id % 10) * 0.05 }}
                         >
-                          <div className="flex items-start gap-4">
-                            <div className="p-2 rounded-full bg-muted/30 shrink-0">
-                              {resource.icon}
+                          <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
+                            <div className="flex justify-between items-start mb-4">
+                              <div className="p-3 rounded-full bg-muted/30">
+                                {resource.icon}
+                              </div>
+                              <div className="flex gap-2">
+                                <span className="px-2 py-1 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
+                                  {resource.level}
+                                </span>
+                                <span className="px-2 py-1 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
+                                  {resource.type}
+                                </span>
+                              </div>
                             </div>
                             
-                            <div className="flex-grow">
-                              <div className="flex justify-between items-start">
-                                <h3 className="text-lg font-semibold">{resource.title}</h3>
-                                <div className="flex gap-2">
-                                  <span className="px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
-                                    {resource.level}
-                                  </span>
-                                  <span className="px-2 py-0.5 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
-                                    {resource.type}
-                                  </span>
-                                </div>
-                              </div>
-                              
-                              <p className="text-sm text-foreground/70 my-2">
-                                {resource.description}
-                              </p>
-                              
-                              <div className="flex justify-between items-center">
-                                <span className="text-xs text-foreground/50">{resource.category}</span>
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                >
-                                  Access Resource
-                                </Button>
-                              </div>
+                            <h3 className="text-xl font-semibold mb-2">{resource.title}</h3>
+                            
+                            <p className="text-foreground/70 mb-2 flex-grow">
+                              {resource.description}
+                            </p>
+                            
+                            <div className="text-xs text-foreground/50 mb-4">
+                              {resource.subcategory && (
+                                <div className="mb-1">Topic: {resource.subcategory}</div>
+                              )}
+                              <div>Category: {resource.category}</div>
                             </div>
-                          </div>
+                            
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="mt-auto w-full"
+                              onClick={() => handleResourceClick(resource.id)}
+                            >
+                              Access Resource
+                            </Button>
+                          </Card>
                         </motion.div>
                       ))}
                     </div>
-                  </ScrollArea>
-                </TabsContent>
-              </Tabs>
-            )}
-            
-            {sortedResources.length > 0 && (
-              <div className="mt-12">
-                <Pagination
-                  totalItems={sortedResources.length}
-                  itemsPerPage={itemsPerPage}
-                  currentPage={currentPage}
-                  onPageChange={handlePageChange}
-                  className="mb-6"
-                />
-                
-                <div className="text-center text-sm text-foreground/70">
-                  Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, sortedResources.length)} of {sortedResources.length} resources
+                  </TabsContent>
+                  
+                  <TabsContent value="list" className="mt-0">
+                    <ScrollArea className="h-[70vh] rounded-md border">
+                      <div className="w-full">
+                        {currentItems.map((resource) => (
+                          <motion.div
+                            key={resource.id}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            className="border-b p-4 hover:bg-muted/10"
+                          >
+                            <div className="flex items-start gap-4">
+                              <div className="p-2 rounded-full bg-muted/30 shrink-0">
+                                {resource.icon}
+                              </div>
+                              
+                              <div className="flex-grow">
+                                <div className="flex justify-between items-start">
+                                  <h3 className="text-lg font-semibold">{resource.title}</h3>
+                                  <div className="flex gap-2">
+                                    <span className="px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-xs rounded-full">
+                                      {resource.level}
+                                    </span>
+                                    <span className="px-2 py-0.5 bg-brand-orange/10 text-brand-orange text-xs rounded-full">
+                                      {resource.type}
+                                    </span>
+                                  </div>
+                                </div>
+                                
+                                <p className="text-sm text-foreground/70 my-2">
+                                  {resource.description}
+                                </p>
+                                
+                                <div className="flex justify-between items-center">
+                                  <div className="text-xs text-foreground/50">
+                                    {resource.category} {resource.subcategory && `/ ${resource.subcategory}`}
+                                  </div>
+                                  <Button 
+                                    variant="outline" 
+                                    size="sm"
+                                    onClick={() => handleResourceClick(resource.id)}
+                                  >
+                                    Access Resource
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </ScrollArea>
+                  </TabsContent>
+                </Tabs>
+              )}
+              
+              {sortedResources.length > 0 && (
+                <div className="mt-12">
+                  <Pagination
+                    totalItems={sortedResources.length}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                    className="mb-6"
+                  />
+                  
+                  <div className="text-center text-sm text-foreground/70">
+                    Showing {indexOfFirstItem + 1}-{Math.min(indexOfLastItem, sortedResources.length)} of {sortedResources.length} resources
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+        ) : (
+          // General Guidance Section
+          <section className="py-12">
+            <div className="container mx-auto px-6">
+              <div className="max-w-3xl mx-auto text-center mb-12">
+                <h2 className="text-3xl font-bold mb-4">General Student Guidance</h2>
+                <p className="text-foreground/70">
+                  Practical tips and strategies to help you succeed in your studies and manage academic challenges.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {guidanceCategories.map((category, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
+                      <div className="p-3 rounded-full bg-muted/30 w-fit mb-4">
+                        {category.icon}
+                      </div>
+                      
+                      <h3 className="text-xl font-semibold mb-3">{category.title}</h3>
+                      
+                      <p className="text-foreground/70 mb-6 flex-grow">
+                        {category.description}
+                      </p>
+                      
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="mt-auto w-full"
+                        onClick={() => navigate(`/resource/guidance-${index + 1}`)}
+                      >
+                        View Guidance
+                      </Button>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="mt-16 max-w-3xl mx-auto bg-muted/20 rounded-xl p-8">
+                <h3 className="text-2xl font-semibold mb-4 text-center">Need Personalized Guidance?</h3>
+                <p className="text-center mb-6">
+                  Our team of experienced educators and mentors is available to provide personalized guidance for your specific academic needs.
+                </p>
+                <div className="flex justify-center">
+                  <Button onClick={() => navigate("/contact")}>
+                    Request Mentoring
+                  </Button>
                 </div>
               </div>
-            )}
-          </div>
-        </section>
+            </div>
+          </section>
+        )}
         
         <ContactForm />
       </main>

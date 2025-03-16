@@ -52,6 +52,10 @@ const Resources: React.FC = () => {
     navigate("/resources");
   };
 
+  const handleBrowseCategory = (category: string) => {
+    navigate(`/resources?category=${category}`);
+  };
+
   return (
     <section id="resources" className="py-24 bg-muted/10">
       <div className="container mx-auto px-6">
@@ -100,7 +104,7 @@ const Resources: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="mt-auto w-full"
-                  onClick={() => navigate("/resources")}
+                  onClick={() => handleBrowseCategory(category.title)}
                 >
                   Browse Resources
                 </Button>
