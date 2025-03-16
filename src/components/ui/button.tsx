@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
@@ -32,16 +32,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   isLoading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   children,
   variant = "primary",
   size = "md",
   className,
   isLoading = false,
   ...props
-}) => {
+}, ref) => {
   return (
     <button
+      ref={ref}
       className={cn(
         buttonVariants({ variant, size }),
         isLoading && "opacity-70",
@@ -75,7 +76,9 @@ const Button: React.FC<ButtonProps> = ({
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = "Button";
 
 export { Button, buttonVariants };
 export default Button;
