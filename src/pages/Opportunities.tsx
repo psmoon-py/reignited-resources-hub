@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import Button from "@/components/ui/button";
 import Pagination from "@/components/ui/pagination";
-import { Card } from "@/components/ui/card";
+import Card from "@/components/ui/card"; // Fixed import for Card component
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { OpportunityType, StatusType, EducationLevel, Opportunity, mockOpportunities } from "@/data/opportunities";

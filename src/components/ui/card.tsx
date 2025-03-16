@@ -28,4 +28,6 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
+// Export both as default and named export to ensure compatibility
+export { Card };
 export default Card;
