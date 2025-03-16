@@ -1,4 +1,6 @@
+
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Card from "../ui/card";
 import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope } from "lucide-react";
@@ -44,6 +46,12 @@ const resourceCategories = [
 ];
 
 const Resources: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleViewAllResources = () => {
+    navigate("/resources");
+  };
+
   return (
     <section id="resources" className="py-24 bg-muted/10">
       <div className="container mx-auto px-6">
@@ -92,6 +100,7 @@ const Resources: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="mt-auto w-full"
+                  onClick={() => navigate("/resources")}
                 >
                   Browse Resources
                 </Button>
@@ -101,7 +110,7 @@ const Resources: React.FC = () => {
         </div>
         
         <div className="mt-16 text-center">
-          <Button size="lg">
+          <Button size="lg" onClick={handleViewAllResources}>
             View All Resources
           </Button>
         </div>

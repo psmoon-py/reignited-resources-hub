@@ -2,7 +2,7 @@
 // Types
 export type OpportunityType = "competition" | "hackathon" | "internship" | "scholarship";
 export type StatusType = "active" | "expired" | "upcoming";
-export type EducationLevel = "highSchool" | "undergraduate" | "graduate" | "phd";
+export type EducationLevel = "middleSchool" | "highSchool" | "undergraduate";
 
 export interface Opportunity {
   id: string;
@@ -37,7 +37,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-30),
     deadline: getDateString(30),
     location: "Virtual",
-    eligibleEducationLevels: ["highSchool", "undergraduate"],
+    eligibleEducationLevels: ["middleSchool", "highSchool", "undergraduate"],
     status: "active",
     link: "https://example.com/science-olympiad"
   },
@@ -50,7 +50,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-60),
     deadline: getDateString(-15),
     location: "Houston, TX",
-    eligibleEducationLevels: ["undergraduate", "graduate"],
+    eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "expired",
     link: "https://example.com/nasa-program"
   },
@@ -76,7 +76,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(15),
     deadline: getDateString(60),
     location: "Virtual",
-    eligibleEducationLevels: ["highSchool", "undergraduate", "graduate", "phd"],
+    eligibleEducationLevels: ["middleSchool", "highSchool", "undergraduate"],
     status: "upcoming",
     link: "https://example.com/global-hackathon"
   },
@@ -89,7 +89,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-90),
     deadline: getDateString(10),
     location: "Redmond, WA",
-    eligibleEducationLevels: ["undergraduate", "graduate", "phd"],
+    eligibleEducationLevels: ["undergraduate"],
     status: "active",
     link: "https://example.com/microsoft-internship"
   },
@@ -102,7 +102,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-120),
     deadline: getDateString(75),
     location: "Nationwide",
-    eligibleEducationLevels: ["undergraduate", "graduate"],
+    eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
     link: "https://example.com/women-stem-scholarship"
   },
@@ -115,7 +115,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(30),
     deadline: getDateString(120),
     location: "Tokyo, Japan",
-    eligibleEducationLevels: ["highSchool", "undergraduate", "graduate"],
+    eligibleEducationLevels: ["middleSchool", "highSchool", "undergraduate"],
     status: "upcoming",
     link: "https://example.com/robotics-championship"
   },
@@ -128,7 +128,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-150),
     deadline: getDateString(-30),
     location: "Remote",
-    eligibleEducationLevels: ["undergraduate", "graduate"],
+    eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "expired",
     link: "https://example.com/google-summer-code"
   },
@@ -141,7 +141,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-10),
     deadline: getDateString(40),
     location: "Virtual",
-    eligibleEducationLevels: ["undergraduate", "graduate", "phd"],
+    eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
     link: "https://example.com/quantum-hackathon"
   },
@@ -167,7 +167,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-40),
     deadline: getDateString(90),
     location: "Hawthorne, CA",
-    eligibleEducationLevels: ["undergraduate", "graduate", "phd"],
+    eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
     link: "https://example.com/hyperloop-competition"
   },
@@ -175,12 +175,12 @@ export const mockOpportunities: Opportunity[] = [
     id: "12",
     title: "National Science Foundation Grant",
     organization: "NSF",
-    description: "Research grants for graduate students pursuing advanced studies in STEM fields.",
+    description: "Research grants for students pursuing advanced studies in STEM fields.",
     type: "scholarship",
     registrationOpens: getDateString(-30),
     deadline: getDateString(60),
     location: "United States",
-    eligibleEducationLevels: ["graduate", "phd"],
+    eligibleEducationLevels: ["undergraduate"],
     status: "active",
     link: "https://example.com/nsf-grant"
   },
@@ -193,7 +193,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(20),
     deadline: getDateString(80),
     location: "Online",
-    eligibleEducationLevels: ["undergraduate", "graduate", "phd"],
+    eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "upcoming",
     link: "https://example.com/aws-hackathon"
   },
@@ -206,7 +206,7 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-60),
     deadline: getDateString(15),
     location: "Multiple Locations",
-    eligibleEducationLevels: ["graduate", "phd"],
+    eligibleEducationLevels: ["undergraduate"],
     status: "active",
     link: "https://example.com/fair-internship"
   },
@@ -219,8 +219,21 @@ export const mockOpportunities: Opportunity[] = [
     registrationOpens: getDateString(-90),
     deadline: getDateString(-15),
     location: "Nationwide",
-    eligibleEducationLevels: ["highSchool"],
+    eligibleEducationLevels: ["middleSchool", "highSchool"],
     status: "expired",
     link: "https://example.com/first-robotics"
-  }
+  },
+  {
+    id: "16",
+    title: "Middle School Science Fair",
+    organization: "National Science Teachers Association",
+    description: "Showcase your scientific research projects and compete with other middle school students.",
+    type: "competition",
+    registrationOpens: getDateString(-20),
+    deadline: getDateString(40),
+    location: "Multiple Locations",
+    eligibleEducationLevels: ["middleSchool"],
+    status: "active",
+    link: "https://example.com/middle-school-science-fair"
+  },
 ];

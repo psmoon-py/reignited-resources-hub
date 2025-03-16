@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/layout/Navbar";
@@ -29,7 +28,7 @@ import {
 } from "lucide-react";
 import Button from "@/components/ui/button";
 import Pagination from "@/components/ui/pagination";
-import Card from "@/components/ui/card"; // Fixed import for Card component
+import Card from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { OpportunityType, StatusType, EducationLevel, Opportunity, mockOpportunities } from "@/data/opportunities";
@@ -37,8 +36,8 @@ import { OpportunityType, StatusType, EducationLevel, Opportunity, mockOpportuni
 const Opportunities: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTypes, setSelectedTypes] = useState<OpportunityType[]>([]);
-  const [selectedStatus, setSelectedStatus] = useState<StatusType | "">("");
-  const [selectedEducation, setSelectedEducation] = useState<EducationLevel | "">("");
+  const [selectedStatus, setSelectedStatus] = useState<StatusType | "all">("all");
+  const [selectedEducation, setSelectedEducation] = useState<EducationLevel | "all">("all");
   const [sortOption, setSortOption] = useState<string>("deadline");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,12 +59,12 @@ const Opportunities: React.FC = () => {
     
     // Status filter
     const matchesStatus = 
-      selectedStatus === "" || 
+      selectedStatus === "all" || 
       opportunity.status === selectedStatus;
     
     // Education level filter
     const matchesEducation = 
-      selectedEducation === "" || 
+      selectedEducation === "all" || 
       opportunity.eligibleEducationLevels.includes(selectedEducation as EducationLevel);
     
     return matchesSearchTerm && matchesType && matchesStatus && matchesEducation;
@@ -241,13 +240,13 @@ const Opportunities: React.FC = () => {
                       <h4 className="font-medium mb-2">Status</h4>
                       <Select 
                         value={selectedStatus} 
-                        onValueChange={(value) => setSelectedStatus(value as StatusType)}
+                        onValueChange={(value) => setSelectedStatus(value as StatusType | "all")}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="All statuses" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All statuses</SelectItem>
+                          <SelectItem value="all">All statuses</SelectItem>
                           <SelectItem value="active">Active</SelectItem>
                           <SelectItem value="upcoming">Upcoming</SelectItem>
                           <SelectItem value="expired">Expired</SelectItem>
@@ -260,17 +259,16 @@ const Opportunities: React.FC = () => {
                       <h4 className="font-medium mb-2">Education Level</h4>
                       <Select 
                         value={selectedEducation} 
-                        onValueChange={(value) => setSelectedEducation(value as EducationLevel)}
+                        onValueChange={(value) => setSelectedEducation(value as EducationLevel | "all")}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="All levels" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All levels</SelectItem>
+                          <SelectItem value="all">All levels</SelectItem>
+                          <SelectItem value="middleSchool">Middle School</SelectItem>
                           <SelectItem value="highSchool">High School</SelectItem>
                           <SelectItem value="undergraduate">Undergraduate</SelectItem>
-                          <SelectItem value="graduate">Graduate</SelectItem>
-                          <SelectItem value="phd">PhD</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -305,8 +303,8 @@ const Opportunities: React.FC = () => {
                       onClick={() => {
                         setSearchTerm("");
                         setSelectedTypes([]);
-                        setSelectedStatus("");
-                        setSelectedEducation("");
+                        setSelectedStatus("all");
+                        setSelectedEducation("all");
                         setSortOption("deadline");
                         setSortDirection("asc");
                       }}
@@ -326,7 +324,7 @@ const Opportunities: React.FC = () => {
                     className="flex items-center"
                   >
                     <Filter className="h-4 w-4 mr-2" />
-                    Filters {selectedTypes.length > 0 || selectedStatus || selectedEducation ? `(${selectedTypes.length + (selectedStatus ? 1 : 0) + (selectedEducation ? 1 : 0)})` : ""}
+                    Filters {selectedTypes.length > 0 || (selectedStatus !== "all") || (selectedEducation !== "all") ? `(${selectedTypes.length + (selectedStatus !== "all" ? 1 : 0) + (selectedEducation !== "all" ? 1 : 0)})` : ""}
                   </Button>
                   
                   <div className="flex space-x-2">
@@ -377,13 +375,13 @@ const Opportunities: React.FC = () => {
                       <TabsContent value="status">
                         <Select 
                           value={selectedStatus} 
-                          onValueChange={(value) => setSelectedStatus(value as StatusType)}
+                          onValueChange={(value) => setSelectedStatus(value as StatusType | "all")}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="All statuses" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="">All statuses</SelectItem>
+                            <SelectItem value="all">All statuses</SelectItem>
                             <SelectItem value="active">Active</SelectItem>
                             <SelectItem value="upcoming">Upcoming</SelectItem>
                             <SelectItem value="expired">Expired</SelectItem>
@@ -394,17 +392,16 @@ const Opportunities: React.FC = () => {
                       <TabsContent value="level">
                         <Select 
                           value={selectedEducation} 
-                          onValueChange={(value) => setSelectedEducation(value as EducationLevel)}
+                          onValueChange={(value) => setSelectedEducation(value as EducationLevel | "all")}
                         >
                           <SelectTrigger>
                             <SelectValue placeholder="All levels" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="">All levels</SelectItem>
+                            <SelectItem value="all">All levels</SelectItem>
+                            <SelectItem value="middleSchool">Middle School</SelectItem>
                             <SelectItem value="highSchool">High School</SelectItem>
                             <SelectItem value="undergraduate">Undergraduate</SelectItem>
-                            <SelectItem value="graduate">Graduate</SelectItem>
-                            <SelectItem value="phd">PhD</SelectItem>
                           </SelectContent>
                         </Select>
                       </TabsContent>
@@ -416,8 +413,8 @@ const Opportunities: React.FC = () => {
                       onClick={() => {
                         setSearchTerm("");
                         setSelectedTypes([]);
-                        setSelectedStatus("");
-                        setSelectedEducation("");
+                        setSelectedStatus("all");
+                        setSelectedEducation("all");
                         setSortOption("deadline");
                         setSortDirection("asc");
                       }}
@@ -481,9 +478,9 @@ const Opportunities: React.FC = () => {
                           <div className="flex flex-wrap gap-1 mb-4">
                             {opportunity.eligibleEducationLevels.map((level) => (
                               <Badge key={level} variant="outline" className="text-xs">
-                                {level === "highSchool" ? "High School" : 
-                                 level === "undergraduate" ? "Undergraduate" : 
-                                 level === "graduate" ? "Graduate" : "PhD"}
+                                {level === "middleSchool" ? "Middle School" :
+                                 level === "highSchool" ? "High School" : 
+                                 level === "undergraduate" ? "Undergraduate" : level}
                               </Badge>
                             ))}
                           </div>
@@ -502,8 +499,8 @@ const Opportunities: React.FC = () => {
                       onClick={() => {
                         setSearchTerm("");
                         setSelectedTypes([]);
-                        setSelectedStatus("");
-                        setSelectedEducation("");
+                        setSelectedStatus("all");
+                        setSelectedEducation("all");
                       }}
                     >
                       Reset Filters
