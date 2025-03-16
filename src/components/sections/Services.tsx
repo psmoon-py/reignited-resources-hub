@@ -1,8 +1,10 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import Card from "../ui/card";
 import { BookOpen, File, GraduationCap, FileCheck } from "lucide-react";
 import Button from "../ui/button";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -16,6 +18,7 @@ const services = [
       "Interview preparation",
     ],
     delay: 0.1,
+    link: "/college-application-guide"
   },
   {
     icon: <GraduationCap className="h-16 w-16 text-brand-orange" />,
@@ -28,6 +31,7 @@ const services = [
       "Score improvement tracking",
     ],
     delay: 0.2,
+    link: "#"
   },
   {
     icon: <BookOpen className="h-16 w-16 text-brand-blue" />,
@@ -40,6 +44,7 @@ const services = [
       "Mock tests with evaluation",
     ],
     delay: 0.3,
+    link: "#"
   },
   {
     icon: <File className="h-16 w-16 text-brand-orange" />,
@@ -52,6 +57,7 @@ const services = [
       "Financial aid consultation",
     ],
     delay: 0.4,
+    link: "#"
   },
 ];
 
@@ -107,12 +113,14 @@ const Services: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button 
-                    variant={index % 2 === 0 ? "primary" : "secondary"}
-                    className="w-full mt-auto"
-                  >
-                    Learn More
-                  </Button>
+                  <Link to={service.link} className="w-full mt-auto">
+                    <Button 
+                      variant={index % 2 === 0 ? "primary" : "secondary"}
+                      className="w-full"
+                    >
+                      Learn More
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             </motion.div>
