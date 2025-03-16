@@ -221,12 +221,12 @@ const generateResources = () => {
   // Generate resources for each category
   Object.entries(resourceTitles).forEach(([category, titles]) => {
     const getIconComponent = () => {
-      if (category === "Programming") return <Code className="h-8 w-8 text-brand-blue" />;
-      if (category === "Science") return <TestTube className="h-8 w-8 text-brand-orange" />;
-      if (category === "Mathematics") return <Calculator className="h-8 w-8 text-brand-blue" />;
-      if (category === "AI & Machine Learning") return <BrainCircuit className="h-8 w-8 text-brand-orange" />;
-      if (category === "Astronomy") return <Telescope className="h-8 w-8 text-brand-blue" />;
-      return <BookOpen className="h-8 w-8 text-brand-orange" />;
+      if (category === "Programming") return React.createElement(Code, { className: "h-8 w-8 text-brand-blue" });
+      if (category === "Science") return React.createElement(TestTube, { className: "h-8 w-8 text-brand-orange" });
+      if (category === "Mathematics") return React.createElement(Calculator, { className: "h-8 w-8 text-brand-blue" });
+      if (category === "AI & Machine Learning") return React.createElement(BrainCircuit, { className: "h-8 w-8 text-brand-orange" });
+      if (category === "Astronomy") return React.createElement(Telescope, { className: "h-8 w-8 text-brand-blue" });
+      return React.createElement(BookOpen, { className: "h-8 w-8 text-brand-orange" });
     };
 
     // Create multiple variations of each title with different difficulty levels and types
