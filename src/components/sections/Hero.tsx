@@ -26,8 +26,15 @@ const Hero: React.FC = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section className="relative min-h-screen gradient-bg flex items-center pt-28 pb-20 overflow-hidden">
+    <section id="home" className="relative min-h-screen gradient-bg flex items-center pt-28 pb-20 overflow-hidden">
       {/* Background blobs and effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div ref={blobRef} className="absolute top-1/3 -left-64 w-96 h-96 bg-brand-blue/20 rounded-full filter blur-3xl animate-blob"></div>
@@ -44,7 +51,7 @@ const Hero: React.FC = () => {
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold leading-tight mb-6">
-              <span className="text-gradient-blue">Ignite</span> Your Potential with <span className="text-gradient-orange">Free</span> STEM Resources
+              <span className="text-gradient-blue">Power</span> Your Potential with <span className="text-gradient-orange">Free</span> STEM Resources
             </h1>
             
             <p className="text-xl text-foreground/70 mb-8 text-balance">
@@ -64,12 +71,7 @@ const Hero: React.FC = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                onClick={() => {
-                  const contactSection = document.getElementById("contact");
-                  if (contactSection) {
-                    contactSection.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
+                onClick={() => navigate("/auth")}
               >
                 Join Our Community
               </Button>
@@ -104,7 +106,7 @@ const Hero: React.FC = () => {
             <div className="relative">
               <div className="glow absolute inset-0"></div>
               <img 
-                src="/lovable-uploads/a03d48ae-f3bc-4742-8bfa-8a0d0166c413.png" 
+                src="/lovable-uploads/1ee8b090-4e88-4118-97e7-d1d0b24aebe7.png" 
                 alt="Reignited Minds Logo" 
                 className="w-80 h-80 object-contain animate-float z-10 relative"
               />

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Menu, X, Lightbulb, LogOut, User } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Button from "../ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
   
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -42,13 +43,35 @@ const Navbar: React.FC = () => {
     navigate("/");
   };
 
+  const scrollToSection = (sectionId: string) => {
+    closeMenu();
+    
+    // If we're on the homepage, scroll to the section
+    if (location.pathname === '/') {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // If we're on another page, navigate to homepage and then scroll to section
+      navigate('/');
+      // Need to wait for navigation to complete before scrolling
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  };
+
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Resources", path: "/resources" },
-    { name: "Opportunities", path: "/#opportunities" },
-    { name: "College Help", path: "/#services" },
-    { name: "Workshops", path: "/#workshops" },
-    { name: "Contact", path: "/#contact" },
+    { name: "Home", action: () => scrollToSection("home") },
+    { name: "Resources", action: () => scrollToSection("resources") },
+    { name: "Opportunities", action: () => scrollToSection("opportunities") },
+    { name: "College Help", action: () => scrollToSection("services") },
+    { name: "Workshops", action: () => scrollToSection("workshops") },
+    { name: "Contact", action: () => scrollToSection("contact") },
   ];
 
   return (
@@ -64,7 +87,11 @@ const Navbar: React.FC = () => {
           className="flex items-center space-x-2 text-xl font-bold"
           onClick={closeMenu}
         >
-          <Lightbulb className="h-8 w-8 text-gradient-primary" />
+          <img 
+            src="/lovable-uploads/1ee8b090-4e88-4118-97e7-d1d0b24aebe7.png" 
+            className="h-10 w-10" 
+            alt="Reignited Minds" 
+          />
           <span className="text-gradient-primary">
             Reignited Minds
           </span>
@@ -74,13 +101,13 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-8">
           <div className="flex items-center space-x-6">
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.name}
-                to={link.path}
+                onClick={link.action}
                 className="text-foreground/80 hover:text-foreground transition-colors duration-300 font-medium"
               >
                 {link.name}
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -138,14 +165,13 @@ const Navbar: React.FC = () => {
       >
         <div className="flex flex-col space-y-8 mt-20">
           {navLinks.map((link) => (
-            <Link
+            <button
               key={link.name}
-              to={link.path}
+              onClick={link.action}
               className="text-xl font-medium text-foreground hover:text-brand-blue transition-colors duration-300"
-              onClick={closeMenu}
             >
               {link.name}
-            </Link>
+            </button>
           ))}
           
           {isAuthenticated ? (
