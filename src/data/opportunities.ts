@@ -39,7 +39,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Virtual",
     eligibleEducationLevels: ["middleSchool", "highSchool", "undergraduate"],
     status: "active",
-    link: "https://example.com/science-olympiad"
+    link: "https://www.ibo-info.org/" // International Biology Olympiad
   },
   {
     id: "2",
@@ -52,7 +52,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Houston, TX",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "expired",
-    link: "https://example.com/nasa-program"
+    link: "https://intern.nasa.gov/" // NASA Internships
   },
   {
     id: "3",
@@ -65,7 +65,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Multiple Locations",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
-    link: "https://example.com/stem-scholarship"
+    link: "https://www.nshss.org/scholarships/stem/" // STEM Scholarships
   },
   {
     id: "4",
@@ -78,7 +78,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Virtual",
     eligibleEducationLevels: ["middleSchool", "highSchool", "undergraduate"],
     status: "upcoming",
-    link: "https://example.com/global-hackathon"
+    link: "https://mlh.io/seasons/2023/events" // Major League Hacking
   },
   {
     id: "5",
@@ -91,7 +91,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Redmond, WA",
     eligibleEducationLevels: ["undergraduate"],
     status: "active",
-    link: "https://example.com/microsoft-internship"
+    link: "https://www.microsoft.com/en-us/research/internships/" // Microsoft Research
   },
   {
     id: "6",
@@ -104,7 +104,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Nationwide",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
-    link: "https://example.com/women-stem-scholarship"
+    link: "https://www.societyofwomenengineers.org/scholarships/" // Society of Women Engineers
   },
   {
     id: "7",
@@ -117,7 +117,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Tokyo, Japan",
     eligibleEducationLevels: ["middleSchool", "highSchool", "undergraduate"],
     status: "upcoming",
-    link: "https://example.com/robotics-championship"
+    link: "https://www.firstinspires.org/robotics/frc" // FIRST Robotics Competition
   },
   {
     id: "8",
@@ -130,7 +130,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Remote",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "expired",
-    link: "https://example.com/google-summer-code"
+    link: "https://summerofcode.withgoogle.com/" // Google Summer of Code
   },
   {
     id: "9",
@@ -143,7 +143,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Virtual",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
-    link: "https://example.com/quantum-hackathon"
+    link: "https://www.ibm.com/quantum/quantum-challenge" // IBM Quantum Challenge
   },
   {
     id: "10",
@@ -156,7 +156,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "United States",
     eligibleEducationLevels: ["highSchool"],
     status: "expired",
-    link: "https://example.com/national-merit"
+    link: "https://www.nationalmerit.org/" // National Merit Scholarship Corporation
   },
   {
     id: "11",
@@ -169,7 +169,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Hawthorne, CA",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "active",
-    link: "https://example.com/hyperloop-competition"
+    link: "https://www.spacex.com/hyperloop" // SpaceX Hyperloop
   },
   {
     id: "12",
@@ -182,7 +182,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "United States",
     eligibleEducationLevels: ["undergraduate"],
     status: "active",
-    link: "https://example.com/nsf-grant"
+    link: "https://www.nsf.gov/funding/" // NSF Funding
   },
   {
     id: "13",
@@ -195,7 +195,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Online",
     eligibleEducationLevels: ["highSchool", "undergraduate"],
     status: "upcoming",
-    link: "https://example.com/aws-hackathon"
+    link: "https://aws.amazon.com/events/events-programs/community-day/" // AWS Community Day
   },
   {
     id: "14",
@@ -208,7 +208,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Multiple Locations",
     eligibleEducationLevels: ["undergraduate"],
     status: "active",
-    link: "https://example.com/fair-internship"
+    link: "https://research.facebook.com/programs/internships/" // Meta Research
   },
   {
     id: "15",
@@ -221,7 +221,7 @@ export const mockOpportunities: Opportunity[] = [
     location: "Nationwide",
     eligibleEducationLevels: ["middleSchool", "highSchool"],
     status: "expired",
-    link: "https://example.com/first-robotics"
+    link: "https://www.firstinspires.org/robotics/frc" // FIRST Robotics Competition
   },
   {
     id: "16",
@@ -234,6 +234,6 @@ export const mockOpportunities: Opportunity[] = [
     location: "Multiple Locations",
     eligibleEducationLevels: ["middleSchool"],
     status: "active",
-    link: "https://example.com/middle-school-science-fair"
+    link: "https://www.societyforscience.org/isef/" // International Science and Engineering Fair
   },
 ];

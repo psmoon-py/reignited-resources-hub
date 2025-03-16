@@ -5,41 +5,41 @@ import { useNavigate } from "react-router-dom";
 import Card from "../ui/card";
 import Button from "../ui/button";
 import { Award, Briefcase, GraduationCap, Trophy } from "lucide-react";
+import { mockOpportunities } from "@/data/opportunities";
 
-const opportunities = [
-  {
-    icon: <Trophy className="h-10 w-10 text-brand-blue" />,
-    category: "Competitions",
-    title: "International Science Olympiad",
-    date: "Registration Open: May 15 - July 30, 2023",
-    description: "Compete with students worldwide in various scientific disciplines and win scholarships and recognition.",
-    delay: 0.1,
-  },
-  {
-    icon: <Briefcase className="h-10 w-10 text-brand-orange" />,
-    category: "Internships",
-    title: "NASA Summer Research Program",
-    date: "Application Deadline: March 31, 2023",
-    description: "Gain hands-on experience working with NASA scientists on cutting-edge space research projects.",
-    delay: 0.2,
-  },
-  {
-    icon: <GraduationCap className="h-10 w-10 text-brand-blue" />,
-    category: "Scholarships",
-    title: "STEM Excellence Scholarship",
-    date: "Application Deadline: December 15, 2023",
-    description: "Full-ride scholarships for underprivileged students pursuing STEM degrees at top universities.",
-    delay: 0.3,
-  },
-  {
-    icon: <Award className="h-10 w-10 text-brand-orange" />,
-    category: "Hackathons",
-    title: "Global Solutions Hackathon",
-    date: "Event Date: August 5-7, 2023",
-    description: "48-hour coding challenge to develop innovative solutions for global environmental problems.",
-    delay: 0.4,
-  },
-];
+// Select top 4 opportunities that are active or upcoming
+const featuredOpportunities = mockOpportunities
+  .filter(opp => opp.status === "active" || opp.status === "upcoming")
+  .slice(0, 4)
+  .map((opp, index) => {
+    let icon;
+    switch (opp.type) {
+      case "competition":
+        icon = <Trophy className="h-10 w-10 text-brand-blue" />;
+        break;
+      case "internship":
+        icon = <Briefcase className="h-10 w-10 text-brand-orange" />;
+        break;
+      case "scholarship":
+        icon = <GraduationCap className="h-10 w-10 text-brand-blue" />;
+        break;
+      case "hackathon":
+        icon = <Award className="h-10 w-10 text-brand-orange" />;
+        break;
+    }
+    
+    return {
+      icon,
+      category: opp.type.charAt(0).toUpperCase() + opp.type.slice(1) + "s",
+      title: opp.title,
+      date: opp.status === "active" ? 
+        `Application Deadline: ${new Date(opp.deadline).toLocaleDateString()}` : 
+        `Registration Opens: ${new Date(opp.registrationOpens).toLocaleDateString()}`,
+      description: opp.description,
+      link: opp.link,
+      delay: 0.1 * (index + 1),
+    };
+  });
 
 const Opportunities: React.FC = () => {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const Opportunities: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {opportunities.map((item, index) => (
+          {featuredOpportunities.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -92,7 +92,7 @@ const Opportunities: React.FC = () => {
                     <Button 
                       variant={index % 2 === 0 ? "primary" : "secondary"} 
                       className="w-full"
-                      onClick={() => window.open("https://example.com/apply", "_blank", "noopener,noreferrer")}
+                      onClick={() => window.open(item.link, "_blank", "noopener,noreferrer")}
                     >
                       Apply Now
                     </Button>
