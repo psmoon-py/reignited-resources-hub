@@ -7,6 +7,7 @@ import Resources from "@/components/sections/Resources";
 import Opportunities from "@/components/sections/Opportunities";
 import Services from "@/components/sections/Services";
 import Workshops from "@/components/sections/Workshops";
+import ContactForm from "@/components/sections/ContactForm";
 
 const Index: React.FC = () => {
   useEffect(() => {
@@ -23,6 +24,7 @@ const Index: React.FC = () => {
         <Opportunities />
         <Services />
         <Workshops />
+        <ContactForm />
       </main>
       <Footer />
     </div>

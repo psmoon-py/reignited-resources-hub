@@ -1,10 +1,12 @@
 
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../ui/button";
 import { ArrowRight, Sparkles, BookOpen, Award, Users } from "lucide-react";
 
 const Hero: React.FC = () => {
   const blobRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -51,11 +53,24 @@ const Hero: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="group">
+              <Button 
+                size="lg" 
+                className="group" 
+                onClick={() => navigate("/resources")}
+              >
                 Explore Resources
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                onClick={() => {
+                  const contactSection = document.getElementById("contact");
+                  if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
                 Join Our Community
               </Button>
             </div>

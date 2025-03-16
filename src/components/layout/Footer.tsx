@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Lightbulb, Instagram, Github, ExternalLink } from "lucide-react";
+import { Lightbulb, Instagram, Github, ExternalLink, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                 className="p-2 rounded-full bg-muted hover:bg-brand-blue/20 transition-colors duration-300"
                 aria-label="Discord"
               >
-                <ExternalLink className="h-5 w-5 text-foreground" />
+                <MessageSquare className="h-5 w-5 text-foreground" />
               </a>
               <a
                 href="https://github.com/"
@@ -55,9 +55,9 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/#resources" className="text-foreground/70 hover:text-brand-blue transition-colors duration-300">
+                <Link to="/resources" className="text-foreground/70 hover:text-brand-blue transition-colors duration-300">
                   Resources
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="/#opportunities" className="text-foreground/70 hover:text-brand-blue transition-colors duration-300">
@@ -74,21 +74,42 @@ const Footer: React.FC = () => {
                   Workshops
                 </a>
               </li>
+              <li>
+                <a href="/#contact" className="text-foreground/70 hover:text-brand-blue transition-colors duration-300">
+                  Contact Us
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Community */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
+            <h3 className="text-lg font-semibold mb-4">Join Our Community</h3>
             <ul className="space-y-2">
+              <li>
+                <a 
+                  href="https://discord.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-foreground/70 hover:text-brand-blue transition-colors duration-300 flex items-center"
+                >
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  Discord Community
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://instagram.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-foreground/70 hover:text-brand-blue transition-colors duration-300 flex items-center"
+                >
+                  <Instagram className="h-4 w-4 mr-2" />
+                  Follow @reignitedminds
+                </a>
+              </li>
               <li className="text-foreground/70">
                 Email: info@reignitedminds.org
-              </li>
-              <li className="text-foreground/70">
-                Follow us: @reignitedminds
-              </li>
-              <li className="text-foreground/70">
-                Join our Discord community
               </li>
             </ul>
           </div>
