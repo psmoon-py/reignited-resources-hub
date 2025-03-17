@@ -12,6 +12,7 @@ import ResourceDetail from "./pages/ResourceDetail";
 import Auth from "./pages/Auth";
 import Opportunities from "./pages/Opportunities";
 import CollegeApplicationGuide from "./pages/CollegeApplicationGuide";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
