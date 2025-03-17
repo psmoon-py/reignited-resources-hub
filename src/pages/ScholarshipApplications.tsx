@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -12,7 +11,7 @@ import Card from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { scholarshipSections, getResourceIcon } from "@/data/scholarshipContent";
 import { useAuth } from "@/contexts/AuthContext";
-import { useMediaQuery } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ScholarshipApplications: React.FC = () => {
   const { sectionId } = useParams<{ sectionId: string }>();
@@ -21,7 +20,7 @@ const ScholarshipApplications: React.FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { isAuthenticated } = useAuth();
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (sectionId) {
