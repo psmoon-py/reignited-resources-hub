@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BookOpen, Video, Globe, FileText, Play, Laptop, Smartphone, FileBox } from "lucide-react";
 
@@ -902,4 +903,166 @@ export const englishProficiencyData = [
   {
     id: "grammar",
     title: "Grammar Resources",
-    description: "Master English grammar with comprehensive materials covering all the structures you need for proficiency tests
+    description: "Master English grammar with comprehensive materials covering all the structures you need for proficiency tests.",
+    icon: <BookOpen className="h-6 w-6" />,
+    shortDescription: "Learn and practice essential grammar rules and structures for accurate English in all exam tasks.",
+    requiresAuth: false,
+    content: {
+      introduction: "Strong grammar skills are fundamental to success in English proficiency tests. This section provides focused resources to help you master key grammatical structures and avoid common errors.",
+      sections: [
+        {
+          title: "Grammar Fundamentals",
+          content: "Mastering the basic building blocks of English grammar provides a solid foundation for more complex structures.",
+          tips: [
+            "Review parts of speech and their functions",
+            "Master verb tenses and their appropriate use",
+            "Understand sentence structure patterns",
+            "Practice identifying and correcting common errors"
+          ],
+          resources: [
+            {
+              title: "English Grammar in Use",
+              description: "Comprehensive reference and practice book for intermediate learners.",
+              link: "https://www.cambridge.org/us/cambridgeenglish/catalog/grammar-vocabulary-and-pronunciation/english-grammar-use-5th-edition",
+              type: "book",
+              premium: true,
+              rating: 4.9
+            },
+            {
+              title: "Grammar Girl",
+              description: "Clear explanations of grammar rules and common mistakes.",
+              link: "https://www.quickanddirtytips.com/grammar-girl",
+              type: "website",
+              rating: 4.7
+            }
+          ]
+        },
+        {
+          title: "Advanced Grammar for Test Takers",
+          content: "Proficiency tests often assess sophisticated grammatical structures that demonstrate advanced language competence.",
+          tips: [
+            "Study complex sentence structures with multiple clauses",
+            "Master conditional forms and mixed conditionals",
+            "Practice using a variety of modifiers and qualifiers",
+            "Understand nuanced uses of modals and subjunctives"
+          ],
+          resources: [
+            {
+              title: "English Page",
+              description: "In-depth grammar tutorials with interactive exercises.",
+              link: "https://www.englishpage.com/",
+              type: "website",
+              rating: 4.8
+            },
+            {
+              title: "Grammar Bytes",
+              description: "Grammar instruction with interactive exercises and videos.",
+              link: "https://chompchomp.com/menu.htm",
+              type: "website",
+              rating: 4.5
+            }
+          ]
+        },
+        {
+          title: "Grammar in Context",
+          content: "Understanding how grammar works in authentic contexts is essential for both the receptive and productive aspects of language tests.",
+          tips: [
+            "Analyze grammar use in academic articles and lectures",
+            "Notice how grammar choices affect meaning and tone",
+            "Practice editing texts for grammatical accuracy",
+            "Develop awareness of register and formality levels"
+          ],
+          resources: [
+            {
+              title: "Perfect English Grammar",
+              description: "Clear explanations and exercises for all grammar points.",
+              link: "https://www.perfect-english-grammar.com/",
+              type: "website",
+              rating: 4.6
+            },
+            {
+              title: "Khan Academy Grammar",
+              description: "Free grammar lessons with practice exercises.",
+              link: "https://www.khanacademy.org/humanities/grammar",
+              type: "website",
+              rating: 4.7
+            },
+            {
+              title: "English Grammar Secrets",
+              description: "Videos explaining tricky grammar points.",
+              link: "https://www.youtube.com/playlist?list=PLtDIl_qUwv0yKtHkigxDMWXOKQGD-aJ-M",
+              type: "playlist",
+              rating: 4.5
+            },
+            {
+              title: "Advanced English Grammar Course",
+              description: "Comprehensive video course covering advanced grammar topics.",
+              link: "https://www.youtube.com/watch?v=QXhBB_W4dso",
+              type: "video",
+              rating: 4.8
+            }
+          ]
+        }
+      ]
+    },
+    resources: [
+      {
+        title: "English Grammar in Use",
+        description: "Comprehensive reference and practice book for intermediate learners.",
+        link: "https://www.cambridge.org/us/cambridgeenglish/catalog/grammar-vocabulary-and-pronunciation/english-grammar-use-5th-edition",
+        type: "book",
+        premium: true,
+        rating: 4.9
+      },
+      {
+        title: "English Page",
+        description: "In-depth grammar tutorials with interactive exercises.",
+        link: "https://www.englishpage.com/",
+        type: "website",
+        rating: 4.8
+      },
+      {
+        title: "Grammar Girl",
+        description: "Clear explanations of grammar rules and common mistakes.",
+        link: "https://www.quickanddirtytips.com/grammar-girl",
+        type: "website",
+        rating: 4.7
+      },
+      {
+        title: "Khan Academy Grammar",
+        description: "Free grammar lessons with practice exercises.",
+        link: "https://www.khanacademy.org/humanities/grammar",
+        type: "website",
+        rating: 4.7
+      },
+      {
+        title: "Perfect English Grammar",
+        description: "Clear explanations and exercises for all grammar points.",
+        link: "https://www.perfect-english-grammar.com/",
+        type: "website",
+        rating: 4.6
+      },
+      {
+        title: "Grammar Bytes",
+        description: "Grammar instruction with interactive exercises and videos.",
+        link: "https://chompchomp.com/menu.htm",
+        type: "website",
+        rating: 4.5
+      },
+      {
+        title: "English Grammar Secrets",
+        description: "Videos explaining tricky grammar points.",
+        link: "https://www.youtube.com/playlist?list=PLtDIl_qUwv0yKtHkigxDMWXOKQGD-aJ-M",
+        type: "playlist",
+        rating: 4.5
+      },
+      {
+        title: "Advanced English Grammar Course",
+        description: "Comprehensive video course covering advanced grammar topics.",
+        link: "https://www.youtube.com/watch?v=QXhBB_W4dso",
+        type: "video",
+        rating: 4.8
+      }
+    ],
+  }
+];
