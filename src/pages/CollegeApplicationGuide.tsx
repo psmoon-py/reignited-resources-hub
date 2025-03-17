@@ -8,7 +8,7 @@ import ContactForm from "@/components/sections/ContactForm";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { guideData } from "../data/collegeApplicationGuide";
+import { guideData, type GuideSection, type Resource } from "../data/collegeApplicationGuide";
 
 const CollegeApplicationGuide: React.FC = () => {
   const { section } = useParams<{ section: string }>();
@@ -24,11 +24,9 @@ const CollegeApplicationGuide: React.FC = () => {
       if (foundSection) {
         setActiveSection(foundSection);
       } else {
-        // If invalid section ID, redirect to main guide page
         navigate("/college-application-guide", { replace: true });
       }
     } else {
-      // If no section specified, default to the guide overview
       setActiveSection(null);
     }
   }, [section, navigate]);
