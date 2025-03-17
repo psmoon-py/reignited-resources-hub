@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -9,7 +8,7 @@ import ContactForm from "@/components/sections/ContactForm";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { guideData, GuideSection, Resource } from "@/data/collegeApplicationGuide";
+import { guideData } from "../data/collegeApplicationGuide";
 
 const CollegeApplicationGuide: React.FC = () => {
   const { section } = useParams<{ section: string }>();
@@ -95,7 +94,6 @@ const CollegeApplicationGuide: React.FC = () => {
     );
   };
 
-  // Render the guide overview (when no specific section is selected)
   const renderGuideOverview = () => (
     <div className="container mx-auto px-6 py-12">
       <div className="max-w-4xl mx-auto">
@@ -156,14 +154,12 @@ const CollegeApplicationGuide: React.FC = () => {
     </div>
   );
 
-  // Render a specific section of the guide
   const renderSection = () => {
     if (!activeSection) return null;
 
     return (
       <div className="container mx-auto px-6 py-12">
         <div className="max-w-4xl mx-auto">
-          {/* Breadcrumb navigation */}
           <div className="flex items-center text-sm text-foreground/60 mb-8">
             <Link to="/college-application-guide" className="flex items-center hover:text-brand-blue">
               <ArrowLeft className="h-4 w-4 mr-2" />
