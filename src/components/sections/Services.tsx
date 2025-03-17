@@ -31,7 +31,7 @@ const services = [
       "Score improvement tracking",
     ],
     delay: 0.2,
-    link: "#"
+    link: "/test-preparation"
   },
   {
     icon: <BookOpen className="h-16 w-16 text-brand-blue" />,

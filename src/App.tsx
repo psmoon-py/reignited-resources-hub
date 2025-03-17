@@ -12,6 +12,7 @@ import ResourceDetail from "./pages/ResourceDetail";
 import Auth from "./pages/Auth";
 import Opportunities from "./pages/Opportunities";
 import CollegeApplicationGuide from "./pages/CollegeApplicationGuide";
+import TestPreparation from "./pages/TestPreparation";
 import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,8 @@ const App = () => (
               <Route path="/opportunities" element={<Opportunities />} />
               <Route path="/college-application-guide" element={<CollegeApplicationGuide />} />
               <Route path="/college-application-guide/:section" element={<CollegeApplicationGuide />} />
+              <Route path="/test-preparation" element={<TestPreparation />} />
+              <Route path="/test-preparation/:sectionId" element={<TestPreparation />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
