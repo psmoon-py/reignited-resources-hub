@@ -7,8 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { AnimatePresence } from "framer-motion";
-import ResourcesPage from "./pages/Resources";
-import ResourceDetail from "./pages/ResourceDetail";
+// import ResourcesPage from "./pages/Resources";
+// import ResourceDetail from "./pages/ResourceDetail";
 import Auth from "./pages/Auth";
 import Opportunities from "./pages/Opportunities";
 import CollegeApplicationGuide from "./pages/CollegeApplicationGuide";
@@ -29,8 +29,8 @@ const App = () => (
           <AnimatePresence mode="wait">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/resources" element={<ResourcesPage />} />
-              <Route path="/resource/:id" element={<ResourceDetail />} />
+              {/* <Route path="/resources" element={<ResourcesPage />} />
+              <Route path="/resource/:id" element={<ResourceDetail />} /> */}
               <Route path="/auth" element={<Auth />} />
               <Route path="/opportunities" element={<Opportunities />} />
               <Route path="/college-application-guide" element={<CollegeApplicationGuide />} />
