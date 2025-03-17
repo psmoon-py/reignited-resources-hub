@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Card from "../ui/card";
-import { BookOpen, File, GraduationCap, FileCheck } from "lucide-react";
+import { BookOpen, File, GraduationCap, FileCheck, BadgeDollarSign } from "lucide-react";
 import Button from "../ui/button";
 import { Link } from "react-router-dom";
 
@@ -47,7 +47,7 @@ const services = [
     link: "/english-proficiency"
   },
   {
-    icon: <File className="h-16 w-16 text-brand-orange" />,
+    icon: <BadgeDollarSign className="h-16 w-16 text-brand-orange" />,
     title: "Scholarship Applications",
     description: "Learn how to find and apply for scholarships that match your profile and aspirations.",
     features: [
@@ -57,7 +57,7 @@ const services = [
       "Financial aid consultation",
     ],
     delay: 0.4,
-    link: "#"
+    link: "/scholarship-applications"
   },
 ];
 
