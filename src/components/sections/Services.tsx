@@ -44,7 +44,7 @@ const services = [
       "Mock tests with evaluation",
     ],
     delay: 0.3,
-    link: "#"
+    link: "/english-proficiency"
   },
   {
     icon: <File className="h-16 w-16 text-brand-orange" />,
