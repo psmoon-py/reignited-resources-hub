@@ -7,7 +7,7 @@ import { ResourceGrid } from "@/components/stem-resources/ResourceGrid";
 import { ResourceTypeFilter } from "@/components/stem-resources/ResourceTypeFilter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getResourcesBySubject } from "@/data/resources/index";
+import { getResourcesBySubject } from "@/data/resources";
 import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
