@@ -18,7 +18,7 @@ import EngineeringResources from "./pages/stem-resources/EngineeringResources";
 import ResourcesByType from "./pages/stem-resources/ResourcesByType";
 
 // Theme and Context providers
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "./components/theme-provider";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ResourceProvider } from "@/contexts/ResourceContext";
 import { Toaster } from "@/components/ui/toaster";

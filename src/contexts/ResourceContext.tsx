@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { StemResource } from '@/types/resource';
 import { 
@@ -7,7 +6,7 @@ import {
   getResourcesBySubcategory, 
   getResourcesByType,
   searchResources
-} from '@/data/resources/index';
+} from '@/data/stemResources';
 
 interface ResourceContextType {
   isLoading: boolean;
@@ -29,9 +28,7 @@ export const ResourceProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [filteredResources, setFilteredResources] = useState<StemResource[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Initialize with all resources
   useEffect(() => {
-    // Simulate loading delay to prevent UI jank
     const timer = setTimeout(() => {
       setFilteredResources(allResources);
       setIsLoading(false);
@@ -40,7 +37,6 @@ export const ResourceProvider: React.FC<{ children: ReactNode }> = ({ children }
     return () => clearTimeout(timer);
   }, []);
   
-  // Handle search query changes
   useEffect(() => {
     if (searchQuery.trim() === '') {
       setFilteredResources(allResources);
