@@ -9,7 +9,7 @@ import {
   PanelTopOpen
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 
 interface SubjectSelectorProps {
   className?: string;
@@ -70,22 +70,20 @@ export const SubjectSelector: React.FC<SubjectSelectorProps> = ({ className }) =
             className={`h-full cursor-pointer bg-gradient-to-br ${subject.color} hover:shadow-lg transition-all duration-300`}
             onClick={() => navigate(subject.path)}
           >
-            <CardHeader>
+            <div className="p-6">
               <div className="flex justify-center mb-4">
                 {subject.icon}
               </div>
-              <CardTitle className="text-center text-xl">{subject.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="text-center text-foreground/70">
+              <h3 className="text-center text-xl font-semibold">{subject.name}</h3>
+              <p className="text-center text-foreground/70 mt-2">
                 {subject.description}
-              </CardDescription>
-            </CardContent>
-            <CardFooter className="flex justify-center">
-              <div className="text-sm font-medium text-brand-blue hover:underline">
-                Explore Resources
+              </p>
+              <div className="flex justify-center mt-4">
+                <div className="text-sm font-medium text-brand-blue hover:underline">
+                  Explore Resources
+                </div>
               </div>
-            </CardFooter>
+            </div>
           </Card>
         </motion.div>
       ))}

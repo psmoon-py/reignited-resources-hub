@@ -1,9 +1,9 @@
 
 import React from "react";
 import { StemResource } from "@/types/resource";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Book, Video, FileText, Globe, Smartphone, FileDigit, PlaySquare, BookOpen, Tool, Database, Youtube, ListChecks } from "lucide-react";
+import { Book, Video, FileText, Globe, Smartphone, FileDigit, PlaySquare, BookOpen, Database, Youtube, ListChecks, Wrench } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, compact = 
       case "presentation": return <PlaySquare className="h-5 w-5 text-brand-orange" />;
       case "course": return <BookOpen className="h-5 w-5 text-brand-blue" />;
       case "book": return <Book className="h-5 w-5 text-brand-orange" />;
-      case "tool": return <Tool className="h-5 w-5 text-brand-blue" />;
+      case "tool": return <Wrench className="h-5 w-5 text-brand-blue" />;
       case "dataset": return <Database className="h-5 w-5 text-brand-orange" />;
       default: return <FileText className="h-5 w-5 text-brand-blue" />;
     }
@@ -45,16 +45,16 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, compact = 
     return (
       <Link to={resource.url} target="_blank" rel="noopener noreferrer">
         <Card className="h-full hover:shadow-md transition-shadow">
-          <CardHeader className="pb-2">
+          <div className="pb-2 p-4">
             <div className="flex justify-between items-start">
               <div className="p-2 rounded-full bg-muted/30">{getIcon()}</div>
               <Badge variant="secondary" className={getDifficultyColor()}>
                 {resource.difficulty}
               </Badge>
             </div>
-            <CardTitle className="text-lg mt-2 line-clamp-2">{resource.title}</CardTitle>
-          </CardHeader>
-          <CardFooter className="pt-0 flex justify-between items-center">
+            <h3 className="text-lg mt-2 line-clamp-2 font-semibold">{resource.title}</h3>
+          </div>
+          <div className="pt-0 flex justify-between items-center p-4 border-t">
             <Badge variant="outline">{resource.type}</Badge>
             {resource.rating && (
               <div className="flex items-center">
@@ -62,7 +62,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, compact = 
                 <span className="text-sm ml-1">{resource.rating}</span>
               </div>
             )}
-          </CardFooter>
+          </div>
         </Card>
       </Link>
     );
@@ -75,19 +75,19 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, compact = 
     >
       <Link to={resource.url} target="_blank" rel="noopener noreferrer">
         <Card className="h-full hover:shadow-md transition-shadow">
-          <CardHeader className="pb-2">
+          <div className="pb-2 p-4">
             <div className="flex justify-between items-start">
               <div className="p-2 rounded-full bg-muted/30">{getIcon()}</div>
               <Badge variant="secondary" className={getDifficultyColor()}>
                 {resource.difficulty}
               </Badge>
             </div>
-            <CardTitle className="text-xl mt-2">{resource.title}</CardTitle>
+            <h3 className="text-xl mt-2 font-semibold">{resource.title}</h3>
             {resource.author && (
-              <CardDescription>By {resource.author}</CardDescription>
+              <p className="text-muted-foreground">{resource.author}</p>
             )}
-          </CardHeader>
-          <CardContent>
+          </div>
+          <div className="p-4">
             <p className="text-foreground/70 line-clamp-3">{resource.description}</p>
             <div className="flex flex-wrap gap-1 mt-3">
               {resource.tags.slice(0, 3).map((tag, index) => (
@@ -101,8 +101,8 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, compact = 
                 </Badge>
               )}
             </div>
-          </CardContent>
-          <CardFooter className="pt-0 flex justify-between items-center">
+          </div>
+          <div className="pt-0 flex justify-between items-center p-4 border-t">
             <Badge variant="outline">{resource.type}</Badge>
             <div className="flex items-center">
               {resource.isFree ? (
@@ -117,7 +117,7 @@ export const ResourceCard: React.FC<ResourceCardProps> = ({ resource, compact = 
                 </div>
               )}
             </div>
-          </CardFooter>
+          </div>
         </Card>
       </Link>
     </motion.div>

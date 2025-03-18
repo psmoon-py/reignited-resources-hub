@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { 
   Video, FileText, Globe, Smartphone, FileDigit, 
-  PlaySquare, BookOpen, Book, Tool, Database, Youtube, ListChecks
+  PlaySquare, BookOpen, Book, Wrench, Database, Youtube, ListChecks
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,7 +25,7 @@ export const ResourceTypeFilter: React.FC<ResourceTypeFilterProps> = ({ activeTy
     { type: "presentation", label: "Presentations", icon: <PlaySquare className="h-4 w-4 mr-2" /> },
     { type: "course", label: "Courses", icon: <BookOpen className="h-4 w-4 mr-2" /> },
     { type: "book", label: "Books", icon: <Book className="h-4 w-4 mr-2" /> },
-    { type: "tool", label: "Tools", icon: <Tool className="h-4 w-4 mr-2" /> },
+    { type: "tool", label: "Tools", icon: <Wrench className="h-4 w-4 mr-2" /> },
     { type: "dataset", label: "Datasets", icon: <Database className="h-4 w-4 mr-2" /> }
   ];
 
@@ -38,7 +38,7 @@ export const ResourceTypeFilter: React.FC<ResourceTypeFilterProps> = ({ activeTy
       {resourceTypes.map((item) => (
         <Button
           key={item.type}
-          variant={activeType === item.type ? "default" : "outline"}
+          variant={activeType === item.type ? "primary" : "outline"}
           size="sm"
           className="flex items-center"
           onClick={() => handleTypeClick(item.type)}
