@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StemResource } from "@/types/resource";
 import { ResourceCard } from "./ResourceCard";
 import Pagination from "@/components/ui/pagination";
-import { getPaginatedResources } from "@/data/resources";
+import { getPaginatedResources } from "@/data/resources/index";
 
 interface ResourceGridProps {
   resources: StemResource[];

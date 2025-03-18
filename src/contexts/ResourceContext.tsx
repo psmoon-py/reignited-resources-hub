@@ -7,7 +7,7 @@ import {
   getResourcesBySubcategory, 
   getResourcesByType,
   searchResources
-} from '@/data/resources';
+} from '@/data/resources/index';
 
 interface ResourceContextType {
   isLoading: boolean;
