@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Search, Filter, ArrowLeft } from "lucide-react";
@@ -8,10 +7,7 @@ import { ResourceGrid } from "@/components/stem-resources/ResourceGrid";
 import { ResourceTypeFilter } from "@/components/stem-resources/ResourceTypeFilter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { 
-  getResourcesBySubject, 
-  getResourcesBySubcategory
-} from "@/data/stemResources";
+import { getResourcesBySubject } from "@/data/resources";
 import { Link } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -23,7 +19,6 @@ const MathResources: React.FC = () => {
   
   const allMathResources = getResourcesBySubject("math");
   
-  // Filter resources based on search and filters
   const filteredResources = allMathResources.filter(resource => {
     const matchesSearch = searchTerm === "" || 
       resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -63,7 +58,6 @@ const MathResources: React.FC = () => {
       <Navbar />
       
       <main className="flex-grow">
-        {/* Header Section */}
         <section className="bg-gradient-to-b from-blue-500/10 to-background pt-32 pb-16">
           <div className="container mx-auto px-6">
             <div className="flex items-center mb-6">
@@ -111,11 +105,9 @@ const MathResources: React.FC = () => {
           </div>
         </section>
         
-        {/* Filters and Resources */}
         <section className="py-12">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              {/* Sidebar Filters */}
               <div className="lg:col-span-1">
                 <div className="bg-muted/10 rounded-lg p-6 sticky top-24">
                   <h3 className="text-lg font-semibold mb-4">Filters</h3>
@@ -175,7 +167,6 @@ const MathResources: React.FC = () => {
                 </div>
               </div>
               
-              {/* Main Content */}
               <div className="lg:col-span-3">
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold mb-4">
@@ -192,31 +183,31 @@ const MathResources: React.FC = () => {
                     </TabsList>
                     
                     <TabsContent value="all" className="mt-6">
-                      <ResourceGrid resources={filteredResources} />
+                      <ResourceGrid resources={filteredResources} itemsPerPage={9} />
                     </TabsContent>
                     
                     <TabsContent value="videos" className="mt-6">
                       <ResourceGrid resources={filteredResources.filter(r => 
                         r.type === "video" || r.type === "playlist" || r.type === "channel"
-                      )} />
+                      )} itemsPerPage={9} />
                     </TabsContent>
                     
                     <TabsContent value="courses" className="mt-6">
                       <ResourceGrid resources={filteredResources.filter(r => 
                         r.type === "course"
-                      )} />
+                      )} itemsPerPage={9} />
                     </TabsContent>
                     
                     <TabsContent value="articles" className="mt-6">
                       <ResourceGrid resources={filteredResources.filter(r => 
                         r.type === "article" || r.type === "pdf"
-                      )} />
+                      )} itemsPerPage={9} />
                     </TabsContent>
                     
                     <TabsContent value="tools" className="mt-6">
                       <ResourceGrid resources={filteredResources.filter(r => 
                         r.type === "tool" || r.type === "app" || r.type === "website"
-                      )} />
+                      )} itemsPerPage={9} />
                     </TabsContent>
                   </Tabs>
                 </div>
