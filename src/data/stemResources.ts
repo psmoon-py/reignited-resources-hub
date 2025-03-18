@@ -1284,3 +1284,13 @@ export const getRelatedResources = (resource: StemResource, limit: number = 3): 
     })
     .slice(0, limit);
 };
+
+// Add pagination function
+export const getPaginatedResources = (
+  resources: StemResource[], 
+  page: number = 1, 
+  perPage: number = 12
+): StemResource[] => {
+  const startIndex = (page - 1) * perPage;
+  return resources.slice(startIndex, startIndex + perPage);
+};
