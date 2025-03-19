@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StemResource } from "@/types/resource";
 import { ResourceCard } from "./ResourceCard";
 import Pagination from "@/components/ui/pagination";
@@ -16,6 +16,11 @@ export const ResourceGrid: React.FC<ResourceGridProps> = ({
   itemsPerPage = 12
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  
+  // Reset to page 1 when resources change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [resources.length]);
   
   if (resources.length === 0) {
     return (
