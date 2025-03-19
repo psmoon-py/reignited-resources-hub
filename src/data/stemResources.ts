@@ -1,7 +1,11 @@
-
 import { StemResource } from "@/types/resource";
+import { additionalMathResources } from "./additionalMathResources";
+import { additionalScienceResources } from "./additionalScienceResources";
+import { additionalTechnologyResources } from "./additionalTechnologyResources";
+import { additionalEngineeringResources } from "./additionalEngineeringResources";
 
-export const stemResources: StemResource[] = [
+// Original stem resources
+export const originalStemResources: StemResource[] = [
   // Math Resources
   {
     id: "math-001",
@@ -1235,6 +1239,15 @@ export const stemResources: StemResource[] = [
   }
 ];
 
+// Combine all resources
+export const stemResources: StemResource[] = [
+  ...originalStemResources,
+  ...additionalMathResources,
+  ...additionalScienceResources,
+  ...additionalTechnologyResources,
+  ...additionalEngineeringResources
+];
+
 // Filter functions to get resources by different criteria
 export const getResourcesBySubject = (subject: string): StemResource[] => {
   return stemResources.filter(resource => 
@@ -1283,4 +1296,15 @@ export const getRelatedResources = (resource: StemResource, limit: number = 3): 
       return bMatchingTags - aMatchingTags;
     })
     .slice(0, limit);
+};
+
+// Function to get paginated resources
+export const getPaginatedResources = (
+  resources: StemResource[],
+  page: number,
+  itemsPerPage: number
+): StemResource[] => {
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  return resources.slice(startIndex, endIndex);
 };
