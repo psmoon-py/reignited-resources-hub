@@ -708,46 +708,579 @@ export const stemResources: StemResource[] = [
     author: "The Odin Project",
     subjects: ["technology"],
     subcategories: ["web-development", "programming"],
-    tags: ["javascript", "ruby", "html", "css", "full-stack"],
+    tags: ["javascript", "ruby on rails", "html", "css", "projects"],
+    rating: 4.8,
+    featured: true,
+    isFree: true
+  },
+  {
+    id: "tech-007",
+    title: "MDN Web Docs",
+    description: "Comprehensive documentation for web technologies including HTML, CSS, JavaScript, and web APIs.",
+    type: "website",
+    difficulty: "all-levels",
+    url: "https://developer.mozilla.org/",
+    imageUrl: "https://developer.mozilla.org/mdn-social-share.png",
+    author: "Mozilla",
+    subjects: ["technology"],
+    subcategories: ["web-development", "programming"],
+    tags: ["documentation", "reference", "tutorials", "web standards"],
+    rating: 4.9,
+    isFree: true
+  },
+  {
+    id: "tech-008",
+    title: "Codecademy - Learn to Code",
+    description: "Interactive platform teaching programming languages and web development through hands-on practice.",
+    type: "course",
+    difficulty: "beginner",
+    url: "https://www.codecademy.com/",
+    imageUrl: "https://www.codecademy.com/resources/blog/content/images/2021/03/og-image-default.png",
+    author: "Codecademy",
+    subjects: ["technology"],
+    subcategories: ["programming", "web-development", "data-science"],
+    tags: ["interactive", "coding", "practice", "multiple languages"],
+    rating: 4.7,
+    isFree: false
+  },
+  {
+    id: "tech-009",
+    title: "Google Machine Learning Crash Course",
+    description: "Free course from Google engineers on machine learning concepts, with TensorFlow implementations and exercises.",
+    type: "course",
+    difficulty: "intermediate",
+    url: "https://developers.google.com/machine-learning/crash-course",
+    imageUrl: "https://developers.google.com/static/machine-learning/crash-course/images/ml_crash_course_social.jpg",
+    author: "Google",
+    subjects: ["technology"],
+    subcategories: ["artificial-intelligence", "data-science"],
+    tags: ["machine learning", "tensorflow", "practical exercises"],
     rating: 4.8,
     isFree: true
+  },
+  {
+    id: "tech-010",
+    title: "Coursera - Machine Learning by Andrew Ng",
+    description: "Foundational machine learning course covering algorithms, practical implementation, and case studies.",
+    type: "course",
+    difficulty: "intermediate",
+    url: "https://www.coursera.org/learn/machine-learning",
+    imageUrl: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/08/33f720502a11e59e72391aa537f5c9/pythonlearn_thumbnail_1x1.png?auto=format%2Ccompress&dpr=1",
+    author: "Andrew Ng, Stanford University",
+    subjects: ["technology"],
+    subcategories: ["artificial-intelligence", "data-science"],
+    tags: ["machine learning", "algorithms", "case studies"],
+    rating: 4.9,
+    featured: true,
+    isFree: true
+  },
+  {
+    id: "tech-011",
+    title: "Udacity - Introduction to Python Programming",
+    description: "Comprehensive course covering Python programming fundamentals with practical exercises and projects.",
+    type: "course",
+    difficulty: "beginner",
+    url: "https://www.udacity.com/course/introduction-to-python--ud1110",
+    imageUrl: "https://d20vrrgs8k4bvw.cloudfront.net/images/courses/thumbnails/ud1110_thumbnail.jpg",
+    author: "Udacity",
+    subjects: ["technology"],
+    subcategories: ["programming"],
+    tags: ["python", "programming basics", "data structures", "functions"],
+    rating: 4.7,
+    isFree: true
+  },
+  {
+    id: "tech-012",
+    title: "Datacamp - Introduction to R",
+    description: "Interactive course teaching R programming language for data analysis and statistics.",
+    type: "course",
+    difficulty: "beginner",
+    url: "https://www.datacamp.com/courses/free-introduction-to-r",
+    imageUrl: "https://www.datacamp.com/datacamp-og-image.jpg",
+    author: "DataCamp",
+    subjects: ["technology"],
+    subcategories: ["data-science", "programming"],
+    tags: ["R programming", "data analysis", "statistics", "interactive"],
+    rating: 4.6,
+    isFree: false
+  },
+  {
+    id: "tech-013",
+    title: "TensorFlow Documentation",
+    description: "Official documentation for TensorFlow machine learning library with tutorials, guides, and API references.",
+    type: "website",
+    difficulty: "intermediate",
+    url: "https://www.tensorflow.org/learn",
+    imageUrl: "https://www.tensorflow.org/site-assets/images/marketing/resources/learners.jpg",
+    author: "Google",
+    subjects: ["technology"],
+    subcategories: ["artificial-intelligence", "programming"],
+    tags: ["tensorflow", "machine learning", "neural networks", "documentation"],
+    rating: 4.8,
+    isFree: true
+  },
+  {
+    id: "tech-014",
+    title: "Cybersecurity Fundamentals",
+    description: "Comprehensive introduction to cybersecurity principles, threats, and defense mechanisms.",
+    type: "course",
+    difficulty: "beginner",
+    url: "https://www.edx.org/professional-certificate/uwashingtonx-essentials-cybersecurity",
+    imageUrl: "https://prod-discovery.edx-cdn.org/media/programs/card_images/1e9c34d2-fe48-498a-a73d-0b71d5723818-daf22e9a3740.jpg",
+    author: "University of Washington",
+    subjects: ["technology"],
+    subcategories: ["cybersecurity", "networking"],
+    tags: ["security", "risk management", "cryptography"],
+    rating: 4.7,
+    isFree: false
+  },
+  {
+    id: "tech-015",
+    title: "Flutter Documentation",
+    description: "Official documentation for Flutter, a UI toolkit for building natively compiled applications for mobile, web, and desktop.",
+    type: "website",
+    difficulty: "intermediate",
+    url: "https://flutter.dev/docs",
+    imageUrl: "https://storage.googleapis.com/cms-storage-bucket/70760bf1e88b184bb1bc.png",
+    author: "Google",
+    subjects: ["technology"],
+    subcategories: ["programming", "web-development"],
+    tags: ["mobile development", "dart", "UI", "cross-platform"],
+    rating: 4.8,
+    isFree: true
+  },
+  {
+    id: "tech-016",
+    title: "Fireship.io",
+    description: "Fast-paced, practical tutorials on modern web and mobile development with concise videos and code examples.",
+    type: "channel",
+    difficulty: "intermediate",
+    url: "https://www.youtube.com/c/Fireship",
+    imageUrl: "https://yt3.googleusercontent.com/ytc/APkrFKb--NH6RwAGHYsD3KfxX-SAgWgIHrjx5tiRzS0EMw=s176-c-k-c0x00ffffff-no-rj",
+    author: "Jeff Delaney",
+    subjects: ["technology"],
+    subcategories: ["web-development", "programming"],
+    tags: ["quick tutorials", "modern web", "javascript", "frameworks"],
+    rating: 4.9,
+    featured: true,
+    isFree: true
+  },
+  {
+    id: "tech-017",
+    title: "Full Stack Open",
+    description: "Modern web development course focusing on building single page applications with ReactJS and supporting technologies.",
+    type: "course",
+    difficulty: "intermediate",
+    url: "https://fullstackopen.com/en/",
+    imageUrl: "https://fullstackopen.com/static/5564daeaa18dd1f5bcb5d83e437621c9/1da52/main.jpg",
+    author: "University of Helsinki",
+    subjects: ["technology"],
+    subcategories: ["web-development", "programming"],
+    tags: ["react", "node.js", "express", "mongodb", "full stack"],
+    rating: 4.8,
+    isFree: true
+  },
+  {
+    id: "tech-018",
+    title: "PyTorch Tutorials",
+    description: "Official tutorials for PyTorch machine learning library with examples and implementation guides.",
+    type: "website",
+    difficulty: "intermediate",
+    url: "https://pytorch.org/tutorials/",
+    imageUrl: "https://pytorch.org/assets/images/pytorch-logo.png",
+    author: "PyTorch Team",
+    subjects: ["technology"],
+    subcategories: ["artificial-intelligence", "programming"],
+    tags: ["deep learning", "neural networks", "python", "machine learning"],
+    rating: 4.8,
+    isFree: true
+  },
+  {
+    id: "tech-019",
+    title: "Git and GitHub for Beginners",
+    description: "Comprehensive guide to version control with Git and collaboration with GitHub.",
+    type: "video",
+    difficulty: "beginner",
+    url: "https://www.youtube.com/watch?v=RGOj5yH7evk",
+    imageUrl: "https://i.ytimg.com/vi/RGOj5yH7evk/maxresdefault.jpg",
+    author: "freeCodeCamp",
+    subjects: ["technology"],
+    subcategories: ["programming", "web-development"],
+    tags: ["git", "github", "version control", "collaboration"],
+    rating: 4.8,
+    isFree: true
+  },
+  {
+    id: "tech-020",
+    title: "Web3 University",
+    description: "Learning platform for blockchain development, smart contracts, and decentralized applications.",
+    type: "website",
+    difficulty: "intermediate",
+    url: "https://www.web3.university/",
+    author: "Alchemy",
+    subjects: ["technology"],
+    subcategories: ["blockchain", "programming"],
+    tags: ["web3", "ethereum", "smart contracts", "dapps"],
+    rating: 4.7,
+    isFree: true
+  },
+  
+  // Engineering Resources
+  {
+    id: "eng-001",
+    title: "MIT OpenCourseWare - Introduction to Aerospace Engineering",
+    description: "Complete course materials from MIT's introductory aerospace engineering class with lecture notes and assignments.",
+    type: "course",
+    difficulty: "intermediate",
+    url: "https://ocw.mit.edu/courses/aeronautics-and-astronautics/16-00-introduction-to-aerospace-engineering-and-design-spring-2003/",
+    imageUrl: "https://ocw.mit.edu/images/ocw_mast.png",
+    author: "MIT",
+    publishedDate: "2003",
+    subjects: ["engineering"],
+    subcategories: ["aerospace"],
+    tags: ["aerospace", "design", "engineering principles"],
+    rating: 4.8,
+    isFree: true
+  },
+  {
+    id: "eng-002",
+    title: "Practical Engineering YouTube Channel",
+    description: "Engaging videos explaining civil engineering concepts with real-world demonstrations and experiments.",
+    type: "channel",
+    difficulty: "all-levels",
+    url: "https://www.youtube.com/c/PracticalEngineeringChannel",
+    imageUrl: "https://yt3.googleusercontent.com/ytc/AGIKgqOUlOHgj9I9i9aHIJMUAMbAKXj0h8BI-cafV3GNZg=s176-c-k-c0x00ffffff-no-rj",
+    author: "Grady Hillhouse",
+    subjects: ["engineering"],
+    subcategories: ["civil"],
+    tags: ["infrastructure", "hydraulics", "structural engineering", "demonstrations"],
+    rating: 4.9,
+    featured: true,
+    isFree: true
+  },
+  {
+    id: "eng-003",
+    title: "Engineering Toolbox",
+    description: "Comprehensive reference site with formulas, calculators, and technical data for various engineering disciplines.",
+    type: "website",
+    difficulty: "all-levels",
+    url: "https://www.engineeringtoolbox.com/",
+    author: "Engineering ToolBox",
+    subjects: ["engineering"],
+    subcategories: ["mechanical", "electrical", "civil", "chemical"],
+    tags: ["reference", "calculations", "formulas", "technical data"],
+    rating: 4.7,
+    isFree: true
+  },
+  {
+    id: "eng-004",
+    title: "Circuit Simulator - TinkerCAD",
+    description: "Online tool for designing and simulating electronic circuits with a user-friendly interface.",
+    type: "tool",
+    difficulty: "beginner",
+    url: "https://www.tinkercad.com/circuits",
+    imageUrl: "https://www.tinkercad.com/img/tinkercad-lockup.svg",
+    author: "Autodesk",
+    subjects: ["engineering"],
+    subcategories: ["electrical"],
+    tags: ["simulation", "electronics", "circuits", "design"],
+    rating: 4.6,
+    isFree: true
+  },
+  {
+    id: "eng-005",
+    title: "Engineering Ethics: An Industrial Perspective",
+    description: "Comprehensive PDF examining real-world ethical challenges in engineering practice with case studies.",
+    type: "pdf",
+    difficulty: "intermediate",
+    url: "https://www.sciencedirect.com/book/9780120885756/engineering-ethics",
+    author: "Gail Baura",
+    publishedDate: "2006",
+    subjects: ["engineering"],
+    subcategories: ["mechanical", "electrical", "civil", "chemical", "biomedical", "aerospace", "environmental"],
+    tags: ["ethics", "professional practice", "case studies"],
+    rating: 4.5,
+    isFree: false
+  },
+  {
+    id: "eng-006",
+    title: "Autodesk Fusion 360 Tutorials",
+    description: "Comprehensive tutorials for 3D CAD, CAM, and CAE design software with step-by-step instructions.",
+    type: "playlist",
+    difficulty: "beginner",
+    url: "https://www.youtube.com/playlist?list=PLrZ2zKOtC_-DR2ZkMaK3YthYLErPxCnT-",
+    imageUrl: "https://damassets.autodesk.net/content/dam/autodesk/www/products/fusion-360/overview/images/fusion-1920x1080.png",
+    author: "Autodesk",
+    subjects: ["engineering"],
+    subcategories: ["mechanical"],
+    tags: ["CAD", "3D modeling", "design", "manufacturing"],
+    rating: 4.7,
+    isFree: true
+  },
+  {
+    id: "eng-007",
+    title: "Arduino Project Hub",
+    description: "Collection of Arduino projects with step-by-step instructions, code, and circuit diagrams.",
+    type: "website",
+    difficulty: "all-levels",
+    url: "https://create.arduino.cc/projecthub",
+    imageUrl: "https://cdn.arduino.cc/projecthub/img_og.jpg",
+    author: "Arduino",
+    subjects: ["engineering"],
+    subcategories: ["electrical"],
+    tags: ["microcontrollers", "electronics", "projects", "IoT"],
+    rating: 4.8,
+    featured: true,
+    isFree: true
+  },
+  {
+    id: "eng-008",
+    title: "Structural Engineering Reference Manual",
+    description: "Comprehensive reference for structural engineering principles, analysis, and design.",
+    type: "book",
+    difficulty: "advanced",
+    url: "https://www.amazon.com/Structural-Engineering-Reference-Manual-9th/dp/1591260957",
+    imageUrl: "https://m.media-amazon.com/images/I/51+3UZtRrHL._SX380_BO1,204,203,200_.jpg",
+    author: "Alan Williams",
+    publishedDate: "2020",
+    subjects: ["engineering"],
+    subcategories: ["civil"],
+    tags: ["structural analysis", "design codes", "reference", "professional exam"],
+    rating: 4.8,
+    isFree: false
+  },
+  {
+    id: "eng-009",
+    title: "SolidProfessor - SolidWorks Tutorials",
+    description: "Structured learning path for SolidWorks CAD software with tutorials and exercises.",
+    type: "course",
+    difficulty: "intermediate",
+    url: "https://www.solidprofessor.com/courses/solidworks/",
+    imageUrl: "https://marketing.solidprofessor.com/wp-content/uploads/2022/07/SolidProfessor-Logo-Blue-1024x207.jpg",
+    author: "SolidProfessor",
+    subjects: ["engineering"],
+    subcategories: ["mechanical"],
+    tags: ["CAD", "solidworks", "3D modeling", "design"],
+    rating: 4.7,
+    isFree: false
+  },
+  {
+    id: "eng-010",
+    title: "Real Engineering",
+    description: "Engineering analysis of real-world technologies and systems with detailed explanations and animations.",
+    type: "channel",
+    difficulty: "intermediate",
+    url: "https://www.youtube.com/channel/UCR1IuLEqb6UEA_zQ81kwXfg",
+    imageUrl: "https://yt3.googleusercontent.com/ytc/APkrFKbl8OXjggpWwj61Xl4gU2Pmy0I3aA9z_QOzwIGG=s176-c-k-c0x00ffffff-no-rj",
+    author: "Brian McManus",
+    subjects: ["engineering"],
+    subcategories: ["mechanical", "aerospace", "electrical"],
+    tags: ["analysis", "explanations", "real-world applications"],
+    rating: 4.9,
+    featured: true,
+    isFree: true
+  },
+  {
+    id: "eng-011",
+    title: "ASME Digital Collection",
+    description: "Digital library of American Society of Mechanical Engineers journals, conference proceedings, and books.",
+    type: "website",
+    difficulty: "advanced",
+    url: "https://asmedigitalcollection.asme.org/",
+    imageUrl: "https://asmedigitalcollection.asme.org/pb-assets/journals/asmedigitalcollection/asmedigsquare2-1566926646543.png",
+    author: "ASME",
+    subjects: ["engineering"],
+    subcategories: ["mechanical"],
+    tags: ["research", "journals", "publications", "technical papers"],
+    rating: 4.8,
+    isFree: false
+  },
+  {
+    id: "eng-012",
+    title: "MIT OpenCourseWare - Structural Mechanics",
+    description: "Course materials on the fundamentals of structural mechanics with lecture notes and problem sets.",
+    type: "course",
+    difficulty: "intermediate",
+    url: "https://ocw.mit.edu/courses/civil-and-environmental-engineering/1-050-engineering-mechanics-i-fall-2007/",
+    imageUrl: "https://ocw.mit.edu/images/ocw_mast.png",
+    author: "MIT",
+    subjects: ["engineering"],
+    subcategories: ["civil", "mechanical"],
+    tags: ["structural analysis", "mechanics", "stress analysis"],
+    rating: 4.7,
+    isFree: true
+  },
+  {
+    id: "eng-013",
+    title: "Process Engineering Calculations",
+    description: "Reference manual for chemical engineering calculations including mass balances, heat transfer, and unit operations.",
+    type: "book",
+    difficulty: "advanced",
+    url: "https://www.amazon.com/Chemical-Engineering-Design-Second-Principles/dp/0080966594",
+    imageUrl: "https://m.media-amazon.com/images/I/51cRYcnOItL._SX381_BO1,204,203,200_.jpg",
+    author: "Gavin Towler & Ray Sinnott",
+    publishedDate: "2012",
+    subjects: ["engineering"],
+    subcategories: ["chemical"],
+    tags: ["process design", "calculations", "unit operations"],
+    rating: 4.9,
+    isFree: false
+  },
+  {
+    id: "eng-014",
+    title: "NPTEL - Electrical Engineering Courses",
+    description: "Comprehensive collection of electrical engineering courses from top Indian professors with video lectures and notes.",
+    type: "website",
+    difficulty: "all-levels",
+    url: "https://nptel.ac.in/courses/108106076",
+    imageUrl: "https://nptel.ac.in/content/college_assets/college_logo/NPTEL_logo.png",
+    author: "NPTEL",
+    subjects: ["engineering"],
+    subcategories: ["electrical"],
+    tags: ["circuits", "power systems", "control systems", "electronics"],
+    rating: 4.7,
+    isFree: true
+  },
+  {
+    id: "eng-015",
+    title: "Learn Electronics with Arduino",
+    description: "Hands-on course teaching electronics principles through Arduino projects with step-by-step instructions.",
+    type: "course",
+    difficulty: "beginner",
+    url: "https://www.instructables.com/class/Electronics-Class/",
+    imageUrl: "https://www.instructables.com/assets/img/instructables-logo-big.png",
+    author: "Instructables",
+    subjects: ["engineering"],
+    subcategories: ["electrical"],
+    tags: ["arduino", "electronics", "circuits", "projects"],
+    rating: 4.6,
+    isFree: true
+  },
+  {
+    id: "eng-016",
+    title: "SimScale - Engineering Simulation Platform",
+    description: "Cloud-based simulation platform for computational fluid dynamics, structural mechanics, and thermal analysis.",
+    type: "tool",
+    difficulty: "intermediate",
+    url: "https://www.simscale.com/",
+    imageUrl: "https://www.simscale.com/wp-content/uploads/2017/12/simscale_og_16102017.png",
+    author: "SimScale",
+    subjects: ["engineering"],
+    subcategories: ["mechanical", "civil", "aerospace"],
+    tags: ["simulation", "CFD", "FEA", "thermal analysis"],
+    rating: 4.7,
+    isFree: false
+  },
+  {
+    id: "eng-017",
+    title: "Biomedical Engineering Fundamentals",
+    description: "Comprehensive introduction to biomedical engineering principles, applications, and emerging technologies.",
+    type: "book",
+    difficulty: "intermediate",
+    url: "https://www.amazon.com/Introduction-Biomedical-Engineering-Technology-Applications/dp/1584887494",
+    imageUrl: "https://m.media-amazon.com/images/I/51qg75b2RJL._SX388_BO1,204,203,200_.jpg",
+    author: "John Denis Enderle & Joseph D. Bronzino",
+    publishedDate: "2011",
+    subjects: ["engineering"],
+    subcategories: ["biomedical"],
+    tags: ["medical devices", "biomechanics", "bioinstrumentation"],
+    rating: 4.6,
+    isFree: false
+  },
+  {
+    id: "eng-018",
+    title: "edX - Robotics MicroMasters",
+    description: "Graduate-level course series on robotics covering kinematics, dynamics, control, and perception.",
+    type: "course",
+    difficulty: "advanced",
+    url: "https://www.edx.org/micromasters/pennx-robotics",
+    imageUrl: "https://prod-discovery.edx-cdn.org/media/programs/card_images/51abe6cd-8dcc-4dde-b58d-a096bd42d11f-95c4fad88bb7.jpg",
+    author: "University of Pennsylvania",
+    subjects: ["engineering"],
+    subcategories: ["mechanical", "electrical"],
+    tags: ["robotics", "control systems", "perception", "programming"],
+    rating: 4.8,
+    featured: true,
+    isFree: false
+  },
+  {
+    id: "eng-019",
+    title: "Learn Civil Engineering",
+    description: "Comprehensive video course covering structural analysis, reinforced concrete design, and steel design.",
+    type: "playlist",
+    difficulty: "intermediate",
+    url: "https://www.youtube.com/playlist?list=PLEwKaHLo3D2W41vvzzdq_6yeMXL5Lvx1q",
+    author: "Dr. Structure",
+    subjects: ["engineering"],
+    subcategories: ["civil"],
+    tags: ["structural design", "concrete", "steel", "analysis"],
+    rating: 4.7,
+    isFree: true
+  },
+  {
+    id: "eng-020",
+    title: "Environmental Engineering Principles",
+    description: "Introduction to environmental engineering concepts including water treatment, air pollution control, and waste management.",
+    type: "book",
+    difficulty: "intermediate",
+    url: "https://www.amazon.com/Introduction-Environmental-Engineering-Science-Masters/dp/0131481932",
+    imageUrl: "https://m.media-amazon.com/images/I/51M1q5JzsaL._SX383_BO1,204,203,200_.jpg",
+    author: "Gilbert M. Masters & Wendell P. Ela",
+    publishedDate: "2008",
+    subjects: ["engineering"],
+    subcategories: ["environmental", "civil", "chemical"],
+    tags: ["water treatment", "air pollution", "waste management"],
+    rating: 4.8,
+    isFree: false
   }
 ];
 
-// Utility function to get resources by subject
+// Filter functions to get resources by different criteria
 export const getResourcesBySubject = (subject: string): StemResource[] => {
   return stemResources.filter(resource => 
     resource.subjects.includes(subject as any)
   );
 };
 
-// Utility function to get resources by subcategory
-export const getResourcesBySubcategory = (subcategory: string): StemResource[] => {
-  return stemResources.filter(resource => 
-    resource.subcategories.includes(subcategory as any)
-  );
-};
-
-// Utility function to get resources by type
 export const getResourcesByType = (type: string): StemResource[] => {
   return stemResources.filter(resource => 
     resource.type === type
   );
 };
 
-// Utility function to get featured resources
 export const getFeaturedResources = (): StemResource[] => {
   return stemResources.filter(resource => 
     resource.featured === true
   );
 };
 
-// Utility function to get resources with pagination
-export const getPaginatedResources = (
-  resources: StemResource[], 
-  page: number, 
-  itemsPerPage: number
-): StemResource[] => {
-  const startIndex = (page - 1) * itemsPerPage;
-  return resources.slice(startIndex, startIndex + itemsPerPage);
+export const getResourcesByDifficulty = (difficulty: string): StemResource[] => {
+  return stemResources.filter(resource => 
+    resource.difficulty === difficulty || resource.difficulty === "all-levels"
+  );
+};
+
+export const getResourcesBySubcategory = (subcategory: string): StemResource[] => {
+  return stemResources.filter(resource => 
+    resource.subcategories.includes(subcategory as any)
+  );
+};
+
+export const getRelatedResources = (resource: StemResource, limit: number = 3): StemResource[] => {
+  // Get resources with similar subjects or subcategories
+  const related = stemResources.filter(r => 
+    r.id !== resource.id && (
+      r.subjects.some(subject => resource.subjects.includes(subject)) ||
+      r.subcategories.some(subcat => resource.subcategories.includes(subcat as any))
+    )
+  );
+  
+  // Sort by most relevant (most matching tags)
+  return related
+    .sort((a, b) => {
+      const aMatchingTags = a.tags.filter(tag => resource.tags.includes(tag)).length;
+      const bMatchingTags = b.tags.filter(tag => resource.tags.includes(tag)).length;
+      return bMatchingTags - aMatchingTags;
+    })
+    .slice(0, limit);
 };
