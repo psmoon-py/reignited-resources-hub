@@ -1,3 +1,4 @@
+
 import { StemResource } from "@/types/resource";
 
 export const stemResources: StemResource[] = [
@@ -712,3 +713,41 @@ export const stemResources: StemResource[] = [
     isFree: true
   }
 ];
+
+// Utility function to get resources by subject
+export const getResourcesBySubject = (subject: string): StemResource[] => {
+  return stemResources.filter(resource => 
+    resource.subjects.includes(subject as any)
+  );
+};
+
+// Utility function to get resources by subcategory
+export const getResourcesBySubcategory = (subcategory: string): StemResource[] => {
+  return stemResources.filter(resource => 
+    resource.subcategories.includes(subcategory as any)
+  );
+};
+
+// Utility function to get resources by type
+export const getResourcesByType = (type: string): StemResource[] => {
+  return stemResources.filter(resource => 
+    resource.type === type
+  );
+};
+
+// Utility function to get featured resources
+export const getFeaturedResources = (): StemResource[] => {
+  return stemResources.filter(resource => 
+    resource.featured === true
+  );
+};
+
+// Utility function to get resources with pagination
+export const getPaginatedResources = (
+  resources: StemResource[], 
+  page: number, 
+  itemsPerPage: number
+): StemResource[] => {
+  const startIndex = (page - 1) * itemsPerPage;
+  return resources.slice(startIndex, startIndex + itemsPerPage);
+};
