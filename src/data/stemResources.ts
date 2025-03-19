@@ -408,7 +408,7 @@ export const stemResources: StemResource[] = [
     description: "Interactive science simulations for physics, chemistry, biology, and earth science with engaging, game-like environments.",
     type: "tool",
     difficulty: "all-levels",
-    url: "https://phet.colorado.edu/",
+    url: "https://phet.colorado.edu//",
     imageUrl: "https://phet.colorado.edu/images/phet-logo-trademarked.png",
     author: "University of Colorado Boulder",
     subjects: ["science"],
@@ -701,4 +701,4 @@ export const stemResources: StemResource[] = [
     title: "The Odin Project",
     description: "Free, open-source coding curriculum focused on full-stack web development with real-world projects.",
     type: "course",
-    difficulty: "beginner",
+    difficulty
