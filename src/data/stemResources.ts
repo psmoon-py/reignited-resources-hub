@@ -702,3 +702,13 @@ export const stemResources: StemResource[] = [
     description: "Free, open-source coding curriculum focused on full-stack web development with real-world projects.",
     type: "course",
     difficulty: "beginner",
+    url: "https://www.theodinproject.com/",
+    imageUrl: "https://www.theodinproject.com/assets/og-logo-022832d4cefeec1d5266237be260192f5980f9bcbf1c9ca151b358f0ce1fd2df.png",
+    author: "The Odin Project",
+    subjects: ["technology"],
+    subcategories: ["web-development", "programming"],
+    tags: ["javascript", "ruby", "html", "css", "full-stack"],
+    rating: 4.8,
+    isFree: true
+  }
+];
