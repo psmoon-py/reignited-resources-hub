@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Card from "../ui/card";
-import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope } from "lucide-react";
+import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, GraduationCap, BookText, Clock, Lightbulb } from "lucide-react";
 import Button from "../ui/button";
 
 const resourceCategories = [
@@ -43,6 +43,18 @@ const resourceCategories = [
     description: "Textbooks, lecture notes, and study guides for various STEM subjects.",
     delay: 0.6,
   },
+  {
+    icon: <GraduationCap className="h-10 w-10 text-brand-blue" />,
+    title: "Academic Success",
+    description: "Study habits, learning strategies, and time management techniques for students.",
+    delay: 0.7,
+  },
+  {
+    icon: <BookText className="h-10 w-10 text-brand-orange" />,
+    title: "Research Skills",
+    description: "Learn research methodologies, paper writing, and conducting experiments.",
+    delay: 0.8,
+  },
 ];
 
 const Resources: React.FC = () => {
@@ -80,7 +92,7 @@ const Resources: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {resourceCategories.map((category, index) => (
             <motion.div
               key={index}

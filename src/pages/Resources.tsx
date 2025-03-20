@@ -1,18 +1,19 @@
+
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X, ArrowUpAZ, ArrowDownAZ, ArrowUp, RotateCcw, List, Grid2X2, Lightbulb, Book, Presentation, BookText, GraduationCap, Clock } from "lucide-react";
-import Button from "@/components/ui/button";
+import { Search, Filter, BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, X, ArrowUpAZ, ArrowDownAZ, ArrowUp, RotateCcw, List, Grid2X2, Lightbulb, Book, Presentation, BookText, GraduationCap, Clock, Users, FileText, Globe } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Card from "@/components/ui/card";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ContactForm from "@/components/sections/ContactForm";
-import Pagination from "@/components/ui/pagination";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { resourcesData, subjectCategories, resourceTypes, difficultyLevels } from "@/data/resources";
+import { getAllResources } from "@/data/resourcesContent";
 
 // Sort options
 const sortOptions = [
@@ -22,37 +23,107 @@ const sortOptions = [
   { value: "oldest", label: "Oldest", icon: <RotateCcw className="h-4 w-4 mr-2" /> },
 ];
 
+// Main resource categories with paths
+const mainResourceCategories = [
+  {
+    icon: <Code className="h-10 w-10 text-brand-blue" />,
+    title: "Programming",
+    description: "Access tutorials, exercises, and projects in Python, Java, C++, and more.",
+    path: "/resources/programming"
+  },
+  {
+    icon: <TestTube className="h-10 w-10 text-brand-orange" />,
+    title: "Science",
+    description: "Explore physics, chemistry, and biology resources with interactive experiments.",
+    path: "/resources/science"
+  },
+  {
+    icon: <Calculator className="h-10 w-10 text-brand-blue" />,
+    title: "Mathematics",
+    description: "From algebra to calculus with practice problems and step-by-step solutions.",
+    path: "/resources/mathematics"
+  },
+  {
+    icon: <BrainCircuit className="h-10 w-10 text-brand-orange" />,
+    title: "AI & Machine Learning",
+    description: "Learn data science, neural networks, and practical ML applications.",
+    path: "/resources/ai-ml"
+  },
+  {
+    icon: <Telescope className="h-10 w-10 text-brand-blue" />,
+    title: "Astronomy",
+    description: "Discover the cosmos with star charts, planet guides, and space science resources.",
+    path: "/resources/astronomy"
+  },
+  {
+    icon: <BookOpen className="h-10 w-10 text-brand-orange" />,
+    title: "Study Materials",
+    description: "Textbooks, lecture notes, and study guides for various STEM subjects.",
+    path: "/resources/study-materials"
+  },
+  {
+    icon: <GraduationCap className="h-10 w-10 text-brand-blue" />,
+    title: "Academic Success",
+    description: "Study habits, learning strategies, and time management techniques for students.",
+    path: "/resources/academic-success"
+  },
+  {
+    icon: <BookText className="h-10 w-10 text-brand-orange" />,
+    title: "Research Skills",
+    description: "Learn research methodologies, paper writing, and conducting experiments.",
+    path: "/resources/research-skills"
+  },
+];
+
 // General guidance categories
 const guidanceCategories = [
   {
     title: "Study Habits",
     icon: <Book className="h-5 w-5 text-brand-blue" />,
-    description: "Develop effective study routines and habits for academic success"
+    description: "Develop effective study routines and habits for academic success",
+    path: "/resources/academic-success"
   },
   {
     title: "Time Management",
     icon: <Clock className="h-5 w-5 text-brand-orange" />,
-    description: "Strategies for balancing school, activities, and personal time"
+    description: "Strategies for balancing school, activities, and personal time",
+    path: "/resources/academic-success"
   },
   {
     title: "Note-Taking",
     icon: <BookText className="h-5 w-5 text-brand-blue" />,
-    description: "Methods for taking organized, effective notes that enhance learning"
+    description: "Methods for taking organized, effective notes that enhance learning",
+    path: "/resources/academic-success"
   },
   {
     title: "Test Preparation",
     icon: <Presentation className="h-5 w-5 text-brand-orange" />,
-    description: "Techniques for effective exam preparation and reduced test anxiety"
+    description: "Techniques for effective exam preparation and reduced test anxiety",
+    path: "/resources/academic-success"
   },
   {
     title: "Career Planning",
     icon: <GraduationCap className="h-5 w-5 text-brand-blue" />,
-    description: "Guidance for exploring STEM careers and planning your path"
+    description: "Guidance for exploring STEM careers and planning your path",
+    path: "/resources/projects"
   },
   {
     title: "Learning Strategies",
     icon: <Lightbulb className="h-5 w-5 text-brand-orange" />,
-    description: "Effective techniques to improve comprehension and retention"
+    description: "Effective techniques to improve comprehension and retention",
+    path: "/resources/academic-success"
+  },
+  {
+    title: "Networking",
+    icon: <Users className="h-5 w-5 text-brand-blue" />,
+    description: "How to connect with professors, peers, and professionals in your field",
+    path: "/resources/networking"
+  },
+  {
+    title: "Research Projects",
+    icon: <FileText className="h-5 w-5 text-brand-orange" />,
+    description: "Finding and developing research projects and passion projects",
+    path: "/resources/projects"
   }
 ];
 
@@ -68,7 +139,10 @@ const ResourcesPage: React.FC = () => {
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const [activeTab, setActiveTab] = useState("grid");
   const [sortOption, setSortOption] = useState("az");
-  const [mainView, setMainView] = useState("resources"); // "resources" or "guidance"
+  const [mainView, setMainView] = useState("categories"); // "categories", "resources" or "guidance"
+  
+  // Combined resource data from both sources
+  const allResources = [...resourcesData, ...getAllResources()];
   
   // Get available subcategories based on selected category
   const availableSubcategories = selectedCategory !== "All" 
@@ -81,29 +155,42 @@ const ResourcesPage: React.FC = () => {
   }, [selectedCategory]);
 
   // Filter resources based on search term and selected filters
-  const filteredResources = resourcesData.filter((resource) => {
-    const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          resource.description.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredResources = allResources.filter((resource) => {
+    // Handle different resource structures
+    const title = 'title' in resource ? resource.title : '';
+    const description = 'description' in resource ? resource.description : '';
+    const category = 'category' in resource ? resource.category : '';
+    const subcategory = 'subcategory' in resource ? resource.subcategory : '';
+    const level = 'level' in resource ? resource.level : '';
+    const type = 'type' in resource ? resource.type : '';
+
+    const matchesSearch = title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          description.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesCategory = selectedCategory === "All" || resource.category === selectedCategory;
-    const matchesSubcategory = selectedSubcategory === "All" || resource.subcategory === selectedSubcategory;
-    const matchesLevel = selectedLevel === "All" || resource.level === selectedLevel;
-    const matchesType = selectedType === "All" || resource.type === selectedType;
+    const matchesCategory = selectedCategory === "All" || category === selectedCategory;
+    const matchesSubcategory = selectedSubcategory === "All" || subcategory === selectedSubcategory;
+    const matchesLevel = selectedLevel === "All" || level === selectedLevel;
+    const matchesType = selectedType === "All" || type === selectedType;
     
     return matchesSearch && matchesCategory && matchesSubcategory && matchesLevel && matchesType;
   });
 
   // Sort resources based on selected sort option
   const sortedResources = [...filteredResources].sort((a, b) => {
+    const titleA = 'title' in a ? a.title : '';
+    const titleB = 'title' in b ? b.title : '';
+    const idA = 'id' in a ? a.id : 0;
+    const idB = 'id' in b ? b.id : 0;
+    
     switch (sortOption) {
       case "az":
-        return a.title.localeCompare(b.title);
+        return titleA.localeCompare(titleB);
       case "za":
-        return b.title.localeCompare(a.title);
+        return titleB.localeCompare(titleA);
       case "newest":
-        return b.id - a.id;
+        return typeof idB === 'number' && typeof idA === 'number' ? idB - idA : 0;
       case "oldest":
-        return a.id - b.id;
+        return typeof idA === 'number' && typeof idB === 'number' ? idA - idB : 0;
       default:
         return 0;
     }
@@ -130,8 +217,18 @@ const ResourcesPage: React.FC = () => {
     setSortOption("az");
   };
 
-  const handleResourceClick = (resourceId: number) => {
-    navigate(`/resource/${resourceId}`);
+  const handleResourceClick = (resourceId: any) => {
+    // Handle different resource formats
+    if (typeof resourceId === 'string' && resourceId.startsWith('prog-')) {
+      // Handle direct navigation to external links for new resource format
+      const resource = getAllResources().find(r => r.id === resourceId);
+      if (resource && 'link' in resource) {
+        window.open(resource.link, '_blank');
+      }
+    } else {
+      // Handle traditional resource detail view
+      navigate(`/resource/${resourceId}`);
+    }
   };
 
   // Reset to page 1 when filters change
@@ -162,7 +259,7 @@ const ResourcesPage: React.FC = () => {
                 transition={{ delay: 0.1 }}
                 className="text-lg text-foreground/70 mb-8"
               >
-                Access our comprehensive collection of {resourcesData.length}+ STEM learning materials, exercises, and guides - completely free.
+                Access our comprehensive collection of {allResources.length}+ STEM learning materials, exercises, guides, videos, courses, and tools - completely free.
               </motion.p>
               
               <motion.div 
@@ -175,7 +272,12 @@ const ResourcesPage: React.FC = () => {
                 <input
                   type="text"
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    if (e.target.value && mainView === "categories") {
+                      setMainView("resources");
+                    }
+                  }}
                   placeholder="Search for resources..."
                   className="w-full px-12 py-3 rounded-full border border-muted focus:outline-none focus:ring-2 focus:ring-brand-blue shadow-sm"
                 />
@@ -190,55 +292,65 @@ const ResourcesPage: React.FC = () => {
           </div>
         </section>
         
-        {/* Toggle between Resources and Guidance */}
+        {/* View Toggle */}
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-center mb-4">
             <div className="inline-flex rounded-md shadow-sm">
               <button
+                onClick={() => setMainView("categories")}
+                className={`px-4 py-2 text-sm font-medium border ${
+                  mainView === "categories" 
+                  ? "bg-brand-blue text-white border-brand-blue" 
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
+                } rounded-l-lg`}
+              >
+                Categories
+              </button>
+              <button
                 onClick={() => setMainView("resources")}
-                className={`px-4 py-2 text-sm font-medium rounded-l-lg border ${
+                className={`px-4 py-2 text-sm font-medium border ${
                   mainView === "resources" 
                   ? "bg-brand-blue text-white border-brand-blue" 
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
                 }`}
               >
-                Resources
+                All Resources
               </button>
               <button
                 onClick={() => setMainView("guidance")}
                 className={`px-4 py-2 text-sm font-medium rounded-r-lg border ${
                   mainView === "guidance" 
                   ? "bg-brand-blue text-white border-brand-blue" 
-                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+                  : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:hover:bg-gray-700"
                 }`}
               >
-                General Guidance
+                Student Guidance
               </button>
             </div>
           </div>
         </div>
         
         {/* Filters */}
-        <motion.section 
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ 
-            height: showFilters ? "auto" : 0,
-            opacity: showFilters ? 1 : 0
-          }}
-          className="overflow-hidden bg-muted/10"
-        >
-          <div className="container mx-auto px-6 py-6">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Filters</h3>
-              <button 
-                onClick={clearFilters}
-                className="text-sm text-brand-blue hover:underline flex items-center"
-              >
-                <X className="h-4 w-4 mr-1" /> Clear filters
-              </button>
-            </div>
-            
-            {mainView === "resources" && (
+        {mainView === "resources" && (
+          <motion.section 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ 
+              height: showFilters ? "auto" : 0,
+              opacity: showFilters ? 1 : 0
+            }}
+            className="overflow-hidden bg-muted/10"
+          >
+            <div className="container mx-auto px-6 py-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold">Filters</h3>
+                <button 
+                  onClick={clearFilters}
+                  className="text-sm text-brand-blue hover:underline flex items-center"
+                >
+                  <X className="h-4 w-4 mr-1" /> Clear filters
+                </button>
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* Subject Category */}
                 <div>
@@ -312,12 +424,95 @@ const ResourcesPage: React.FC = () => {
                   </Select>
                 </div>
               </div>
-            )}
-          </div>
-        </motion.section>
+            </div>
+          </motion.section>
+        )}
         
-        {/* Main Content - Resources or Guidance */}
-        {mainView === "resources" ? (
+        {/* Main Content - Categories, Resources, or Guidance */}
+        {mainView === "categories" ? (
+          // Resource Categories
+          <section className="py-16">
+            <div className="container mx-auto px-6">
+              <h2 className="text-3xl font-bold mb-12 text-center">STEM Subject Areas</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {mainResourceCategories.map((category, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link to={category.path} className="block h-full">
+                      <Card 
+                        glassEffect 
+                        className="h-full hover:scale-105 transition-transform flex flex-col"
+                      >
+                        <div className="p-4 rounded-full bg-muted/30 w-fit mb-6">
+                          {category.icon}
+                        </div>
+                        <h3 className="text-xl font-semibold mb-3">{category.title}</h3>
+                        <p className="text-foreground/70 mb-6 flex-grow">
+                          {category.description}
+                        </p>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="mt-auto w-full"
+                        >
+                          Explore {category.title}
+                        </Button>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+              
+              <div className="mt-20">
+                <h2 className="text-3xl font-bold mb-12 text-center">Academic and Career Skills</h2>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {guidanceCategories.slice(0, 4).map((category, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link to={category.path} className="block h-full">
+                        <Card className="h-full hover:shadow-lg transition-all flex flex-col">
+                          <div className="p-3 rounded-full bg-muted/30 w-fit mb-4">
+                            {category.icon}
+                          </div>
+                          <h3 className="text-lg font-semibold mb-2">{category.title}</h3>
+                          <p className="text-sm text-foreground/70 mb-4 flex-grow">
+                            {category.description}
+                          </p>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="mt-auto w-full"
+                          >
+                            View Resources
+                          </Button>
+                        </Card>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="mt-16 text-center">
+                <Button size="lg" onClick={() => setMainView("resources")}>
+                  View All Resources
+                </Button>
+              </div>
+            </div>
+          </section>
+        ) : mainView === "resources" ? (
+          // All Resources
           <section className="py-12">
             <div className="container mx-auto px-6">
               <div className="flex justify-between items-center mb-8">
@@ -528,26 +723,27 @@ const ResourcesPage: React.FC = () => {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
-                      <div className="p-3 rounded-full bg-muted/30 w-fit mb-4">
-                        {category.icon}
-                      </div>
-                      
-                      <h3 className="text-xl font-semibold mb-3">{category.title}</h3>
-                      
-                      <p className="text-foreground/70 mb-6 flex-grow">
-                        {category.description}
-                      </p>
-                      
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="mt-auto w-full"
-                        onClick={() => navigate(`/resource/guidance-${index + 1}`)}
-                      >
-                        View Guidance
-                      </Button>
-                    </Card>
+                    <Link to={category.path} className="block h-full">
+                      <Card glassEffect className="h-full flex flex-col hover:shadow-lg">
+                        <div className="p-3 rounded-full bg-muted/30 w-fit mb-4">
+                          {category.icon}
+                        </div>
+                        
+                        <h3 className="text-xl font-semibold mb-3">{category.title}</h3>
+                        
+                        <p className="text-foreground/70 mb-6 flex-grow">
+                          {category.description}
+                        </p>
+                        
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="mt-auto w-full"
+                        >
+                          View Guidance
+                        </Button>
+                      </Card>
+                    </Link>
                   </motion.div>
                 ))}
               </div>

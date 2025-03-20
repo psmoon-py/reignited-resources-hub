@@ -16,6 +16,16 @@ import TestPreparation from "./pages/TestPreparation";
 import EnglishProficiency from "./pages/EnglishProficiency";
 import ScholarshipApplications from "./pages/ScholarshipApplications";
 import { AuthProvider } from "./contexts/AuthContext";
+import ProgrammingResources from "./pages/resources/ProgrammingResources";
+import ScienceResources from "./pages/resources/ScienceResources";
+import MathematicsResources from "./pages/resources/MathematicsResources";
+import AiMlResources from "./pages/resources/AiMlResources";
+import AstronomyResources from "./pages/resources/AstronomyResources";
+import StudyMaterialsResources from "./pages/resources/StudyMaterialsResources";
+import AcademicSuccessResources from "./pages/resources/AcademicSuccessResources";
+import ResearchSkillsResources from "./pages/resources/ResearchSkillsResources";
+import NetworkingResources from "./pages/resources/NetworkingResources";
+import ProjectsResources from "./pages/resources/ProjectsResources";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +41,16 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/resources" element={<ResourcesPage />} />
               <Route path="/resource/:id" element={<ResourceDetail />} />
+              <Route path="/resources/programming" element={<ProgrammingResources />} />
+              <Route path="/resources/science" element={<ScienceResources />} />
+              <Route path="/resources/mathematics" element={<MathematicsResources />} />
+              <Route path="/resources/ai-ml" element={<AiMlResources />} />
+              <Route path="/resources/astronomy" element={<AstronomyResources />} />
+              <Route path="/resources/study-materials" element={<StudyMaterialsResources />} />
+              <Route path="/resources/academic-success" element={<AcademicSuccessResources />} />
+              <Route path="/resources/research-skills" element={<ResearchSkillsResources />} />
+              <Route path="/resources/networking" element={<NetworkingResources />} />
+              <Route path="/resources/projects" element={<ProjectsResources />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/opportunities" element={<Opportunities />} />
               <Route path="/college-application-guide" element={<CollegeApplicationGuide />} />
