@@ -1,16 +1,55 @@
-
 import { StemResource } from "@/types/resource";
 import { mathResources } from "./mathResources";
 import { scienceResources } from "./scienceResources";
 import { technologyResources } from "./technologyResources";
 import { engineeringResources } from "./engineeringResources";
+import { additionalMathResources } from "./additionalMathResources";
+import { additionalScienceResources } from "./additionalScienceResources";
+import { additionalTechnologyResources } from "./additionalTechnologyResources";
+import { additionalEngineeringResources } from "./additionalEngineeringResources";
+import { extendedMathResources } from "./extendedMathResources";
+import { extendedScienceResources } from "./extendedScienceResources";
+import { extendedTechnologyResources } from "./extendedTechnologyResources";
+import { extendedEngineeringResources } from "./extendedEngineeringResources";
+import { moreMathResources } from "./moreMathResources";
+import { moreScienceResources } from "./moreScienceResources";
+import { moreTechnologyResources } from "./moreTechnologyResources";
+import { moreEngineeringResources } from "./moreEngineeringResources";
+import { advancedMathResources } from "./advancedMathResources";
+import { advancedScienceResources } from "./advancedScienceResources";
+import { advancedTechnologyResources } from "./advancedTechnologyResources";
+import { advancedEngineeringResources } from "./advancedEngineeringResources";
+import { specializedMathResources } from "./specializedMathResources";
+import { specializedScienceResources } from "./specializedScienceResources";
+import { specializedTechnologyResources } from "./specializedTechnologyResources";
+import { specializedEngineeringResources } from "./specializedEngineeringResources";
 
 // Combine all resources
 export const allStemResources: StemResource[] = [
   ...mathResources,
   ...scienceResources,
   ...technologyResources,
-  ...engineeringResources
+  ...engineeringResources,
+  ...additionalMathResources,
+  ...additionalScienceResources,
+  ...additionalTechnologyResources,
+  ...additionalEngineeringResources,
+  ...extendedMathResources,
+  ...extendedScienceResources,
+  ...extendedTechnologyResources,
+  ...extendedEngineeringResources,
+  ...moreMathResources,
+  ...moreScienceResources,
+  ...moreTechnologyResources,
+  ...moreEngineeringResources,
+  ...advancedMathResources,
+  ...advancedScienceResources,
+  ...advancedTechnologyResources,
+  ...advancedEngineeringResources,
+  ...specializedMathResources,
+  ...specializedScienceResources,
+  ...specializedTechnologyResources,
+  ...specializedEngineeringResources
 ];
 
 // Utility functions for filtering resources
