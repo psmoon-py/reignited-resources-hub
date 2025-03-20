@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Lightbulb, Instagram, Github, ExternalLink, MessageSquare } from "lucide-react";
+import { Lightbulb, Instagram, Github, ExternalLink, MessageSquare, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
@@ -69,9 +69,14 @@ const Footer: React.FC = () => {
                   College Help
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/#workshops" className="text-foreground/70 hover:text-brand-blue transition-colors duration-300">
                   Workshops
+                </a>
+              </li> */}
+              <li>
+                <a href="/#newsletter" className="text-foreground/70 hover:text-brand-blue transition-colors duration-300">
+                  Newsletter
                 </a>
               </li>
               <li>
@@ -106,6 +111,15 @@ const Footer: React.FC = () => {
                 >
                   <Instagram className="h-4 w-4 mr-2" />
                   Follow @reignitedminds
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/#newsletter" 
+                  className="text-foreground/70 hover:text-brand-blue transition-colors duration-300 flex items-center"
+                >
+                  <Mail className="h-4 w-4 mr-2" />
+                  Subscribe to Newsletter
                 </a>
               </li>
               <li className="text-foreground/70">

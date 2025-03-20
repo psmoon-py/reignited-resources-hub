@@ -70,7 +70,8 @@ const Navbar: React.FC = () => {
     { name: "Resources", action: () => scrollToSection("resources") },
     { name: "Opportunities", action: () => scrollToSection("opportunities") },
     { name: "College Help", action: () => scrollToSection("services") },
-    { name: "Workshops", action: () => scrollToSection("workshops") },
+    // { name: "Workshops", action: () => scrollToSection("workshops") },
+    { name: "Newsletter", action: () => scrollToSection("newsletter") },
     { name: "Contact", action: () => scrollToSection("contact") },
   ];
 
