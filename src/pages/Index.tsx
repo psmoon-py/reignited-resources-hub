@@ -7,7 +7,7 @@ import Hero from "@/components/sections/Hero";
 import Resources from "@/components/sections/Resources";
 import Opportunities from "@/components/sections/Opportunities";
 import Services from "@/components/sections/Services";
-// import Workshops from "@/components/sections/Workshops";
+import Workshops from "@/components/sections/Workshops";
 import ContactForm from "@/components/sections/ContactForm";
 
 const Index: React.FC = () => {
@@ -36,7 +36,7 @@ const Index: React.FC = () => {
         <Resources />
         <Opportunities />
         <Services />
-        {/* <Workshops /> */}
+        <Workshops />
         <ContactForm />
       </main>
       <Footer />

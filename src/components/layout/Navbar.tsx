@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Menu, X, Lightbulb, LogOut, User } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -69,7 +70,7 @@ const Navbar: React.FC = () => {
     { name: "Resources", action: () => scrollToSection("resources") },
     { name: "Opportunities", action: () => scrollToSection("opportunities") },
     { name: "College Help", action: () => scrollToSection("services") },
-    // { name: "Workshops", action: () => scrollToSection("workshops") },
+    { name: "Workshops", action: () => scrollToSection("workshops") },
     { name: "Contact", action: () => scrollToSection("contact") },
   ];
 
