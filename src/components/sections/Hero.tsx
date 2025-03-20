@@ -1,6 +1,7 @@
+
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "../ui/button";
+import { useNavigate, Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, BookOpen, Award, Users } from "lucide-react";
 
 const Hero: React.FC = () => {

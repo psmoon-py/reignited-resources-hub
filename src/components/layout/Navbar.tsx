@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -84,7 +85,8 @@ const MobileNav = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (value: 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [headerClass, setHeaderClass] = useState("");
-  const { isLoggedIn, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const isLoggedIn = !!user;
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -141,7 +143,7 @@ const Navbar = () => {
                 <Button size="sm">Sign In</Button>
               </Link>
             )}
-            <Button variant="ghost" size="icon" onClick={toggleMobileMenu} className="md:hidden">
+            <Button variant="ghost" size="sm" onClick={toggleMobileMenu} className="md:hidden">
               <Menu className="h-5 w-5" />
             </Button>
           </div>

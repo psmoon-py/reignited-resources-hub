@@ -11,7 +11,8 @@ export type ResourceType =
   | "course" 
   | "book" 
   | "tool" 
-  | "dataset";
+  | "dataset"
+  | "social-media";
 
 export type StemSubject = 
   | "math" 
@@ -32,7 +33,24 @@ export type MathSubcategory =
   | "statistics" 
   | "discrete-math" 
   | "number-theory" 
-  | "applied-math";
+  | "applied-math"
+  | "linear-algebra"
+  | "abstract-algebra"
+  | "differential-equations"
+  | "probability"
+  | "problem-solving"
+  | "recreational-math"
+  | "computational-math"
+  | "visualization"
+  | "logic"
+  | "topology"
+  | "cryptography"
+  | "reference"
+  | "overview"
+  | "puzzles"
+  | "combinatorics"
+  | "analysis"
+  | "game-theory";
 
 export type ScienceSubcategory = 
   | "physics" 
@@ -49,7 +67,17 @@ export type TechnologySubcategory =
   | "artificial-intelligence" 
   | "cybersecurity" 
   | "networking" 
-  | "blockchain";
+  | "blockchain"
+  | "computer-science"
+  | "cloud-computing"
+  | "entrepreneurship"
+  | "open-source"
+  | "tech-news"
+  | "hardware"
+  | "professional-development"
+  | "creative-coding"
+  | "devops"
+  | "game-development";
 
 export type EngineeringSubcategory = 
   | "mechanical" 
@@ -58,7 +86,22 @@ export type EngineeringSubcategory =
   | "chemical" 
   | "aerospace" 
   | "biomedical" 
-  | "environmental";
+  | "environmental"
+  | "automotive"
+  | "design"
+  | "computer"
+  | "biological"
+  | "ethics"
+  | "management"
+  | "humanitarian"
+  | "communication"
+  | "career"
+  | "education"
+  | "electronic"
+  | "manufacturing"
+  | "materials"
+  | "robotics"
+  | "electronics";
 
 export interface StemResource {
   id: string;

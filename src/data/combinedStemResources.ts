@@ -1,3 +1,4 @@
+
 import { StemResource } from "@/types/resource";
 import { mathResources } from "./mathResources";
 import { scienceResources } from "./scienceResources";
@@ -7,14 +8,6 @@ import { additionalMathResources } from "./additionalMathResources";
 import { additionalScienceResources } from "./additionalScienceResources";
 import { additionalTechnologyResources } from "./additionalTechnologyResources";
 import { additionalEngineeringResources } from "./additionalEngineeringResources";
-import { extendedMathResources } from "./extendedMathResources";
-import { extendedScienceResources } from "./extendedScienceResources";
-import { extendedTechnologyResources } from "./extendedTechnologyResources";
-import { extendedEngineeringResources } from "./extendedEngineeringResources";
-import { moreMathResources } from "./moreMathResources";
-import { moreScienceResources } from "./moreScienceResources";
-import { moreTechnologyResources } from "./moreTechnologyResources";
-import { moreEngineeringResources } from "./moreEngineeringResources";
 import { advancedMathResources } from "./advancedMathResources";
 import { advancedScienceResources } from "./advancedScienceResources";
 import { advancedTechnologyResources } from "./advancedTechnologyResources";
@@ -34,14 +27,6 @@ export const allStemResources: StemResource[] = [
   ...additionalScienceResources,
   ...additionalTechnologyResources,
   ...additionalEngineeringResources,
-  ...extendedMathResources,
-  ...extendedScienceResources,
-  ...extendedTechnologyResources,
-  ...extendedEngineeringResources,
-  ...moreMathResources,
-  ...moreScienceResources,
-  ...moreTechnologyResources,
-  ...moreEngineeringResources,
   ...advancedMathResources,
   ...advancedScienceResources,
   ...advancedTechnologyResources,
