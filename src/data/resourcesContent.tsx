@@ -1,6 +1,5 @@
-
 import React from "react";
-import { ExternalLink, Youtube, FileText, BookOpen, Globe, Code, VideoIcon } from "lucide-react";
+import { ExternalLink, Youtube, FileText, BookOpen, Globe, Code, VideoIcon, Clock } from "lucide-react";
 
 // Comprehensive resource data with detailed information
 export const programmingResources = [

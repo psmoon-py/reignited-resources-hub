@@ -128,15 +128,17 @@ const ResourcePageTemplate: React.FC<ResourcePageTemplateProps> = ({
                         )}
                       </div>
                       
-                      <Button 
-                        as="a"
+                      {/* FIXED: Removed 'as' property and created a wrapper component */}
+                      <a 
                         href={resource.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-auto w-full flex items-center justify-center"
+                        className="mt-auto w-full"
                       >
-                        Access Resource <ExternalLink className="ml-2 h-4 w-4" />
-                      </Button>
+                        <Button className="w-full flex items-center justify-center">
+                          Access Resource <ExternalLink className="ml-2 h-4 w-4" />
+                        </Button>
+                      </a>
                     </Card>
                   </motion.div>
                 ))}
@@ -193,17 +195,21 @@ const ResourcePageTemplate: React.FC<ResourcePageTemplateProps> = ({
                       )}
                     </div>
                     
-                    <Button 
-                      as="a"
+                    {/* FIXED: Removed 'as' property and created a wrapper component */}
+                    <a 
                       href={resource.link}
                       target="_blank"
-                      variant="outline"
-                      size="sm"
                       rel="noopener noreferrer"
-                      className="mt-auto w-full flex items-center justify-center"
+                      className="mt-auto w-full"
                     >
-                      View Resource <ExternalLink className="ml-1 h-3 w-3" />
-                    </Button>
+                      <Button 
+                        variant="outline"
+                        size="sm"
+                        className="w-full flex items-center justify-center"
+                      >
+                        View Resource <ExternalLink className="ml-1 h-3 w-3" />
+                      </Button>
+                    </a>
                   </Card>
                 </motion.div>
               ))}
