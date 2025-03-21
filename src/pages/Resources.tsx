@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -14,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { resourcesData, subjectCategories, resourceTypes, difficultyLevels } from "@/data/resources";
 import { getAllResources } from "@/data/resourcesContent";
+import Pagination from "@/components/ui/pagination";
 
 // Sort options
 const sortOptions = [
