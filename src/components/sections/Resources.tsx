@@ -3,8 +3,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Card from "../ui/card";
-import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, GraduationCap, BookText, Clock, Lightbulb } from "lucide-react";
+import { BookOpen, Code, TestTube, Calculator, BrainCircuit, Telescope, GraduationCap, BookText } from "lucide-react";
 import Button from "../ui/button";
+import { getResourcesByCategory } from "@/data/resourcesContent";
 
 const resourceCategories = [
   {
@@ -12,48 +13,56 @@ const resourceCategories = [
     title: "Programming",
     description: "Access tutorials, exercises, and projects in Python, Java, C++, and more.",
     delay: 0.1,
+    path: "/resources/programming"
   },
   {
     icon: <TestTube className="h-10 w-10 text-brand-orange" />,
     title: "Science",
     description: "Explore physics, chemistry, and biology resources with interactive experiments.",
     delay: 0.2,
+    path: "/resources/science"
   },
   {
     icon: <Calculator className="h-10 w-10 text-brand-blue" />,
     title: "Mathematics",
     description: "From algebra to calculus with practice problems and step-by-step solutions.",
     delay: 0.3,
+    path: "/resources/mathematics"
   },
   {
     icon: <BrainCircuit className="h-10 w-10 text-brand-orange" />,
     title: "AI & Machine Learning",
     description: "Learn data science, neural networks, and practical ML applications.",
     delay: 0.4,
+    path: "/resources/ai-ml"
   },
   {
     icon: <Telescope className="h-10 w-10 text-brand-blue" />,
     title: "Astronomy",
     description: "Discover the cosmos with star charts, planet guides, and space science resources.",
     delay: 0.5,
+    path: "/resources/astronomy"
   },
   {
     icon: <BookOpen className="h-10 w-10 text-brand-orange" />,
     title: "Study Materials",
     description: "Textbooks, lecture notes, and study guides for various STEM subjects.",
     delay: 0.6,
+    path: "/resources/study-materials"
   },
   {
     icon: <GraduationCap className="h-10 w-10 text-brand-blue" />,
     title: "Academic Success",
     description: "Study habits, learning strategies, and time management techniques for students.",
     delay: 0.7,
+    path: "/resources/academic-success"
   },
   {
     icon: <BookText className="h-10 w-10 text-brand-orange" />,
     title: "Research Skills",
     description: "Learn research methodologies, paper writing, and conducting experiments.",
     delay: 0.8,
+    path: "/resources/research-skills"
   },
 ];
 
@@ -64,8 +73,8 @@ const Resources: React.FC = () => {
     navigate("/resources");
   };
 
-  const handleBrowseCategory = (category: string) => {
-    navigate(`/resources?category=${category}`);
+  const handleBrowseCategory = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -88,7 +97,7 @@ const Resources: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Access a comprehensive library of 1000+ high-quality resources designed to help you excel in your STEM journey. All completely free.
+            Access a comprehensive library of high-quality resources designed to help you excel in your STEM journey. All completely free.
           </motion.p>
         </div>
 
@@ -116,7 +125,7 @@ const Resources: React.FC = () => {
                   variant="outline" 
                   size="sm" 
                   className="mt-auto w-full"
-                  onClick={() => handleBrowseCategory(category.title)}
+                  onClick={() => handleBrowseCategory(category.path)}
                 >
                   Browse Resources
                 </Button>
