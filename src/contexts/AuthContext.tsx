@@ -1,113 +1,166 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
+import type { User, Session } from "@supabase/supabase-js";
+import type { Database } from "@/lib/supabase";
 
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  username: string;
-};
+type Profile = Database['public']['Tables']['profiles']['Row'];
 
 type AuthContextType = {
   user: User | null;
-  isAuthenticated: boolean;
+  profile: Profile | null;
+  session: Session | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
-  signup: (userData: Omit<User, "id"> & { password: string }) => Promise<boolean>;
-  logout: () => void;
-  checkUsernameAvailability: (username: string) => Promise<boolean>;
+  signUp: (email: string, password: string, userData: {
+    firstName: string;
+    lastName: string;
+    username?: string;
+  }) => Promise<{ error: any }>;
+  signIn: (email: string, password: string) => Promise<{ error: any }>;
+  signOut: () => Promise<void>;
+  updateProfile: (updates: Partial<Profile>) => Promise<{ error: any }>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-// Mock database for demo purposes
-const USERS_STORAGE_KEY = 'reignited_minds_users';
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for logged in user in localStorage
-    const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchProfile(session.user.id);
+      }
+      setIsLoading(false);
+    });
+
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      
+      if (session?.user) {
+        await fetchProfile(session.user.id);
+      } else {
+        setProfile(null);
+      }
+      
+      setIsLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
-  const getUsers = (): Array<User & { password: string }> => {
-    const users = localStorage.getItem(USERS_STORAGE_KEY);
-    return users ? JSON.parse(users) : [];
-  };
+  const fetchProfile = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', userId)
+        .single();
 
-  const saveUsers = (users: Array<User & { password: string }>) => {
-    localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
-  };
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error fetching profile:', error);
+        return;
+      }
 
-  const login = async (emailOrUsername: string, password: string): Promise<boolean> => {
-    const users = getUsers();
-    const user = users.find(
-      u => (u.email === emailOrUsername || u.username === emailOrUsername) && u.password === password
-    );
-
-    if (user) {
-      const { password, ...userWithoutPassword } = user;
-      setUser(userWithoutPassword);
-      localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-      return true;
+      setProfile(data);
+    } catch (error) {
+      console.error('Error fetching profile:', error);
     }
-    return false;
   };
 
-  const signup = async (userData: Omit<User, "id"> & { password: string }): Promise<boolean> => {
-    const users = getUsers();
-    
-    // Check if username or email already exists
-    if (users.some(u => u.username === userData.username)) {
-      return false;
+  const signUp = async (email: string, password: string, userData: {
+    firstName: string;
+    lastName: string;
+    username?: string;
+  }) => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) return { error };
+
+      if (data.user) {
+        // Create profile
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert({
+            id: data.user.id,
+            first_name: userData.firstName,
+            last_name: userData.lastName,
+            username: userData.username,
+          });
+
+        if (profileError) {
+          console.error('Error creating profile:', profileError);
+          return { error: profileError };
+        }
+      }
+
+      return { error: null };
+    } catch (error) {
+      return { error };
     }
-    if (users.some(u => u.email === userData.email)) {
-      return false;
+  };
+
+  const signIn = async (email: string, password: string) => {
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      return { error };
+    } catch (error) {
+      return { error };
     }
-
-    const newUser = {
-      ...userData,
-      id: Date.now().toString(),
-    };
-
-    users.push(newUser);
-    saveUsers(users);
-
-    // Auto login after signup
-    const { password, ...userWithoutPassword } = newUser;
-    setUser(userWithoutPassword);
-    localStorage.setItem('currentUser', JSON.stringify(userWithoutPassword));
-    
-    return true;
   };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('currentUser');
+  const signOut = async () => {
+    await supabase.auth.signOut();
   };
 
-  const checkUsernameAvailability = async (username: string): Promise<boolean> => {
-    const users = getUsers();
-    return !users.some(u => u.username === username);
+  const updateProfile = async (updates: Partial<Profile>) => {
+    if (!user) return { error: new Error('No user logged in') };
+
+    try {
+      const { data, error } = await supabase
+        .from('profiles')
+        .update(updates)
+        .eq('id', user.id)
+        .select()
+        .single();
+
+      if (error) return { error };
+
+      setProfile(data);
+      return { error: null };
+    } catch (error) {
+      return { error };
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        isAuthenticated: !!user,
+        profile,
+        session,
         isLoading,
-        login,
-        signup,
-        logout,
-        checkUsernameAvailability,
+        signUp,
+        signIn,
+        signOut,
+        updateProfile,
       }}
     >
       {children}
