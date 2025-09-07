@@ -3,6 +3,7 @@
 ## Project info
 
 **URL**: https://lovable.dev/projects/1c1fa81e-e037-42bb-a82b-99798585d13d
+****Website URL****: https://reignitedminds.lovable.app/
 
 ## How can I edit this code?
 
